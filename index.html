@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Portfolio</title>
+    <script src="tailwind.js"></script>
+    <style>
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+        .icon-xl {
+            width: 48px;
+            height: 48px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <img src="assets/icons/code.svg" alt="Code" class="icon-lg text-blue-600 dark:text-blue-400">
+                    <span class="font-bold text-xl">DevPortfolio</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+                    <a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Skills</a>
+                    <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
+                    <a href="#blog" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</a>
+                    <a href="#testimonials" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Testimonials</a>
+                    <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                        <img src="assets/icons/sun.svg" alt="Light Mode" class="icon hidden dark:block">
+                        <img src="assets/icons/moon.svg" alt="Dark Mode" class="icon block dark:hidden">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-6xl font-bold">
+                        Hi, I'm <span class="text-blue-600 dark:text-blue-400">John Doe</span>
+                    </h1>
+                    <p class="text-2xl text-gray-600 dark:text-gray-400">Backend Developer</p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Specializing in building robust, scalable server-side applications and APIs. 
+                        With 5+ years of experience in designing and implementing efficient backend systems, 
+                        I turn complex problems into elegant solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                            Get In Touch
+                        </a>
+                        <a href="#projects" class="border border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 px-8 py-3 rounded-lg font-semibold transition-colors">
+                            View Projects
+                        </a>
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/github.svg" alt="GitHub" class="icon-lg">
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="icon-lg">
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/twitter.svg" alt="Twitter" class="icon-lg">
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-blue-600/20 dark:bg-blue-400/20 rounded-full blur-3xl"></div>
+                        <img src="assets/images/profile.jpg" alt="Profile" class="relative w-80 h-80 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Technical Skills</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Expertise in modern backend technologies and architectures
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img src="assets/icons/server.svg" alt="Backend" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <h3 class="text-xl font-semibold">Backend Development</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>• Python (Django, Flask, FastAPI)</li>
+                        <li>• Node.js (Express, NestJS)</li>
+                        <li>• Java (Spring Boot)</li>
+                        <li>• Go (Gin, Echo)</li>
+                        <li>• RESTful & GraphQL APIs</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img src="assets/icons/code.svg" alt="Database" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <h3 class="text-xl font-semibold">Databases</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>• PostgreSQL, MySQL</li>
+                        <li>• MongoDB, Redis</li>
+                        <li>• Elasticsearch</li>
+                        <li>• Database Design & Optimization</li>
+                        <li>• Query Performance Tuning</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img src="assets/icons/briefcase.svg" alt="DevOps" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <h3 class="text-xl font-semibold">DevOps & Cloud</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>• Docker, Kubernetes</li>
+                        <li>• AWS, GCP, Azure</li>
+                        <li>• CI/CD Pipelines</li>
+                        <li>• Infrastructure as Code</li>
+                        <li>• Monitoring & Logging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    A selection of my recent backend development work
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <img src="assets/images/project1.jpg" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">E-Commerce API</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Scalable microservices architecture for a high-traffic e-commerce platform handling 100k+ daily transactions.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">FastAPI</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <img src="assets/images/project2.jpg" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Real-time Analytics Platform</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Real-time data processing pipeline with WebSocket support for live dashboard updates.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Node.js</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Redis</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">MongoDB</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <img src="assets/images/project3.jpg" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Authentication Service</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Secure OAuth2 authentication service with JWT tokens, supporting multiple identity providers.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Go</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Docker</span>
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Kubernetes</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Latest Blog Posts</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Thoughts on backend development, architecture, and best practices
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <img src="assets/icons/blog.svg" alt="Blog" class="icon">
+                        <span>June 1, 2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Building Scalable APIs with FastAPI</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Learn how to design and implement high-performance APIs using Python's FastAPI framework...
+                    </p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Read More →</a>
+                </article>
+                <article class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <img src="assets/icons/blog.svg" alt="Blog" class="icon">
+                        <span>May 28, 2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Database Optimization Techniques</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Essential strategies for improving query performance and database scalability...
+                    </p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Read More →</a>
+                </article>
+                <article class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <img src="assets/icons/blog.svg" alt="Blog" class="icon">
+                        <span>May 20, 2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Microservices Architecture Patterns</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Common patterns and best practices for building maintainable microservices...
+                    </p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Read More →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">What Colleagues Say</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Feedback from teammates and collaborators
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <img src="assets/icons/comments.svg" alt="Comment" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300 italic mb-4">
+                                "Working with John was an absolute pleasure. His expertise in backend architecture 
+                                helped us scale our platform to handle millions of requests. He's a true professional."
+                            </p>
+                            <p class="font-semibold">Sarah Chen</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">Senior Frontend Developer @ TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <img src="assets/icons/comments.svg" alt="Comment" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300 italic mb-4">
+                                "John's ability to solve complex problems is remarkable. He designed our entire 
+                                authentication system from scratch, and it's been rock solid ever since."
+                            </p>
+                            <p class="font-semibold">Michael Rodriguez</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">CTO @ StartupXYZ</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <img src="assets/icons/comments.svg" alt="Comment" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300 italic mb-4">
+                                "His code quality is exceptional. Clean, well-documented, and always following 
+                                best practices. Any team would be lucky to have him."
+                            </p>
+                            <p class="font-semibold">Emily Watson</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">Lead DevOps Engineer @ CloudServices</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <img src="assets/icons/comments.svg" alt="Comment" class="icon-xl text-blue-600 dark:text-blue-400">
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300 italic mb-4">
+                                "John consistently delivers high-quality work on time. His communication skills 
+                                make collaboration seamless, even across different time zones."
+                            </p>
+                            <p class="font-semibold">David Kim</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">Product Manager @ InnovateTech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Interested in working together? Let's connect!
+                </p>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-colors" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-colors" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Subject</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-colors" placeholder="What's this about?">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-colors resize-none" placeholder="Your message..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                        Send Message
+                    </button>
+                </form>
+                <div class="mt-12 text-center">
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/envelope.svg" alt="Email" class="icon">
+                            <span>john.doe@example.com</span>
+                        </a>
+                    </div>
+                    <div class="flex justify-center space-x-6 mt-6">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/github.svg" alt="GitHub" class="icon-lg">
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="icon-lg">
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <img src="assets/icons/twitter.svg" alt="Twitter" class="icon-lg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 dark:text-gray-400">
+            <p>&copy; 2024 John Doe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
