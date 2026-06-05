@@ -59,29 +59,38 @@ function devportfolio_scripts() {
 	// Font Awesome.
 	wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
 
-	// Tailwind CSS via CDN with Typography plugin for development as requested.
-	// In production, this should be a compiled file.
+	// Tailwind CSS via CDN with Typography plugin for zero-config production-ready setup.
 	wp_enqueue_script( 'tailwind-cdn', 'https://cdn.tailwindcss.com?plugins=typography', array(), null, false );
 
 	// Theme main stylesheet.
-	wp_enqueue_style( 'devportfolio-style', get_stylesheet_uri(), array(), '1.0.0' );
+	wp_enqueue_style( 'devportfolio-style', get_stylesheet_uri(), array(), '1.1.0' );
 
-	// Custom Tailwind Config.
+	// Custom Tailwind Config - Premium Dark Mode Aesthetic.
 	wp_add_inline_script( 'tailwind-cdn', "
 		tailwind.config = {
+			darkMode: 'class',
 			theme: {
 				extend: {
 					colors: {
-						primary: '#0ea5e9',
-						secondary: '#64748b',
-						dark: '#0f172a',
+						primary: {
+							DEFAULT: '#6366f1', // Indigo 500
+							light: '#818cf8',
+							dark: '#4f46e5',
+						},
+						accent: {
+							DEFAULT: '#10b981', // Emerald 500
+							light: '#34d399',
+							dark: '#059669',
+						},
+						zinc: {
+							950: '#09090b',
+						}
 					},
 					fontFamily: {
 						vazir: ['Vazirmatn', 'sans-serif'],
 					},
 				},
 			},
-			darkMode: 'class',
 		}
 	" );
 }
@@ -153,6 +162,128 @@ function devportfolio_register_portfolio_cpt() {
 	register_taxonomy( 'portfolio_category', array( 'portfolio' ), $cat_args );
 }
 add_action( 'init', 'devportfolio_register_portfolio_cpt' );
+
+/**
+ * Seed Programmatic Data upon theme activation.
+ */
+function devportfolio_seed_data() {
+	if ( get_option( 'devportfolio_data_seeded' ) ) {
+		return;
+	}
+
+	// 1. Create Portfolio Categories.
+	$categories = array( 'Web Development', 'Mobile Apps', 'Cloud Architecture' );
+	$term_ids   = array();
+	foreach ( $categories as $cat ) {
+		$term = wp_insert_term( $cat, 'portfolio_category' );
+		if ( ! is_wp_error( $term ) ) {
+			$term_ids[ $cat ] = $term['term_id'];
+		}
+	}
+
+	// 2. Create Sample Portfolios.
+	$portfolios = array(
+		array(
+			'title'   => 'E-commerce Microservices Platform',
+			'content' => 'A scalable microservices architecture built with Node.js and Go, handling 10k+ concurrent users.',
+			'excerpt' => 'Scalable microservices architecture for global retail.',
+			'tech'    => 'Node.js, Go, Kubernetes, AWS',
+			'cat'     => 'Cloud Architecture',
+		),
+		array(
+			'title'   => 'AI-Powered Analytics Dashboard',
+			'content' => 'Real-time data visualization dashboard with predictive analytics using React and Python.',
+			'excerpt' => 'Advanced data visualization with machine learning integration.',
+			'tech'    => 'React, Python, D3.js, FastAPI',
+			'cat'     => 'Web Development',
+		),
+	);
+
+	foreach ( $portfolios as $p ) {
+		$post_id = wp_insert_post(
+			array(
+				'post_title'   => $p['title'],
+				'post_content' => $p['content'],
+				'post_excerpt' => $p['excerpt'],
+				'post_status'  => 'publish',
+				'post_type'    => 'portfolio',
+			)
+		);
+		if ( $post_id ) {
+			update_post_meta( $post_id, 'tech_stack', $p['tech'] );
+			if ( isset( $term_ids[ $p['cat'] ] ) ) {
+				wp_set_object_terms( $post_id, $term_ids[ $p['cat'] ], 'portfolio_category' );
+			}
+		}
+	}
+
+	// 3. Create Sample Blog Posts.
+	$posts = array(
+		array(
+			'title'   => 'Mastering Clean Architecture in Node.js',
+			'content' => 'Deep dive into decoupling business logic from infrastructure... <pre><code>class UseCase { execute() { ... } }</code></pre>',
+			'excerpt' => 'Learn how to build maintainable Node.js applications.',
+		),
+		array(
+			'title'   => 'Optimizing React Performance for Enterprise',
+			'content' => 'Techniques for reducing bundle size and improving TTI in large-scale apps.',
+			'excerpt' => 'Best practices for high-performance React applications.',
+		),
+	);
+
+	foreach ( $posts as $p ) {
+		wp_insert_post(
+			array(
+				'post_title'   => $p['title'],
+				'post_content' => $p['content'],
+				'post_excerpt' => $p['excerpt'],
+				'post_status'  => 'publish',
+				'post_type'    => 'post',
+			)
+		);
+	}
+
+	// 4. Set up Navigation Menu.
+	$menu_name = 'Main Menu';
+	$menu_id   = wp_create_nav_menu( $menu_name );
+
+	if ( ! is_wp_error( $menu_id ) ) {
+		wp_update_nav_menu_item( $menu_id, 0, array(
+			'menu-item-title'  => 'Home',
+			'menu-item-url'    => home_url( '/' ),
+			'menu-item-status' => 'publish',
+		) );
+		wp_update_nav_menu_item( $menu_id, 0, array(
+			'menu-item-title'  => 'Portfolio',
+			'menu-item-url'    => get_post_type_archive_link( 'portfolio' ),
+			'menu-item-status' => 'publish',
+		) );
+		wp_update_nav_menu_item( $menu_id, 0, array(
+			'menu-item-title'  => 'Blog',
+			'menu-item-url'    => get_post_type_archive_link( 'post' ),
+			'menu-item-status' => 'publish',
+		) );
+
+		set_theme_mod( 'nav_menu_locations', array( 'primary' => $menu_id ) );
+	}
+
+	// 5. Set static front page.
+	$home_page_id = wp_insert_post(
+		array(
+			'post_title'  => 'Home',
+			'post_status' => 'publish',
+			'post_type'   => 'page',
+		)
+	);
+	if ( $home_page_id ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $home_page_id );
+	}
+
+	// Mark as seeded.
+	update_option( 'devportfolio_data_seeded', true );
+}
+add_action( 'after_switch_theme', 'devportfolio_seed_data' );
 
 /**
  * Estimate reading time in minutes.
