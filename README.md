@@ -21,10 +21,6 @@
 ![Home Desktop](screenshots/home-desktop.png)
 *Featuring a high-impact hero section and technical competency grid.*
 
-### 📂 Portfolio Grid
-![Portfolio Grid](screenshots/portfolio-grid.png)
-*Sleek project cards with tech-stack badges and category classification.*
-
 
 ## 🛠️ Installation
 
