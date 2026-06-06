@@ -4,7 +4,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v3.0+-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-blue.svg)](https://opensource.org/licenses/GPL-2.0)
 
-**DevPortfolio Pro** is a highly professional, enterprise-grade custom WordPress theme architected for Senior Software Engineers. It features a minimalist, high-tech aesthetic with a focus on performance, clean architecture, and technical depth.
+**DevPortfolio Pro** is a highly professional, enterprise-grade custom WordPress theme architected for Senior Software Engineers. It features a minimalist, high-tech aesthetic with a focus on performance, accessibility, and technical depth.
 
 ## ✨ Core Features
 
@@ -13,7 +13,7 @@
 - **Portfolio Custom Post Type:** Dedicated project showcase with category filtering and detailed case study layouts.
 - **Technical Blog:** Scannable log layouts with reading time estimation and premium code block styling.
 - **High Performance:** Minimalist architecture with properly enqueued assets and clean code standards.
-- **Instant Setup:** Programmatic seeding creates technical projects and blog posts upon theme activation.
+- **Accessibility Optimized:** Sharp text contrast in both dark and light modes for maximum readability.
 
 ## 💎 Visual Showcase
 
@@ -48,7 +48,7 @@
    Create your menus under **Appearance > Menus** and assign them to the **Primary Menu** and **Footer Menu** locations.
 
 4. **Initialize Content:**
-   The theme automatically seeds sample projects and posts upon activation to ensure your site never starts empty.
+   Start adding your technical projects under **Portfolios** and your blog posts under **Posts**.
 
 ## ⚙️ Technical Standards
 
