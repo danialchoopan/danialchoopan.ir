@@ -80,19 +80,12 @@ add_action( 'init', 'devportfolio_register_portfolio_cpt' );
  * Sets up theme defaults and registers support for various WordPress features.
  */
 function devportfolio_setup() {
-	// Make theme available for translation.
 	load_theme_textdomain( 'devportfolio', get_template_directory() . '/languages' );
-
-	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
-
-	// Let WordPress manage the document title.
 	add_theme_support( 'title-tag' );
-
-	// Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'custom-logo' );
 
-	// Register navigation menus.
 	register_nav_menus(
 		array(
 			'primary' => esc_html__( 'Primary Menu', 'devportfolio' ),
@@ -100,19 +93,7 @@ function devportfolio_setup() {
 		)
 	);
 
-	// Switch default core markup for search form, comment form, and comments to output valid HTML5.
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
+	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) );
 }
 add_action( 'after_setup_theme', 'devportfolio_setup' );
 
@@ -120,39 +101,21 @@ add_action( 'after_setup_theme', 'devportfolio_setup' );
  * Enqueue scripts and styles.
  */
 function devportfolio_scripts() {
-	// Google Fonts: Vazirmatn.
 	wp_enqueue_style( 'devportfolio-fonts', 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&display=swap', array(), null );
-
-	// Tailwind CSS via CDN with Typography plugin.
 	wp_enqueue_script( 'tailwind-cdn', 'https://cdn.tailwindcss.com?plugins=typography', array(), null, false );
+	wp_enqueue_style( 'devportfolio-style', get_stylesheet_uri(), array(), '1.3.0' );
 
-	// Theme main stylesheet.
-	wp_enqueue_style( 'devportfolio-style', get_stylesheet_uri(), array(), '1.2.0' );
-
-	// Custom Tailwind Config.
 	wp_add_inline_script( 'tailwind-cdn', "
 		tailwind.config = {
 			darkMode: 'class',
 			theme: {
 				extend: {
 					colors: {
-						primary: {
-							DEFAULT: '#6366f1',
-							light: '#818cf8',
-							dark: '#4f46e5',
-						},
-						accent: {
-							DEFAULT: '#10b981',
-							light: '#34d399',
-							dark: '#059669',
-						},
-						zinc: {
-							950: '#09090b',
-						}
+						primary: { DEFAULT: '#6366f1', light: '#818cf8', dark: '#4f46e5' },
+						accent: { DEFAULT: '#10b981', light: '#34d399', dark: '#059669' },
+						zinc: { 950: '#09090b' }
 					},
-					fontFamily: {
-						vazir: ['Vazirmatn', 'sans-serif'],
-					},
+					fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
 				},
 			},
 		}
@@ -165,130 +128,63 @@ add_action( 'wp_enqueue_scripts', 'devportfolio_scripts' );
  */
 function devportfolio_reading_time( $content ) {
 	$word_count = str_word_count( strip_tags( $content ) );
-	$reading_time = ceil( $word_count / 200 );
-	return $reading_time;
+	return ceil( $word_count / 200 );
 }
 
 /**
- * Programmatically Seed Data upon theme activation.
+ * WP Customizer API implementation.
+ */
+function devportfolio_customize_register( $wp_customize ) {
+	// Header Section.
+	$wp_customize->add_section( 'devportfolio_header', array( 'title' => __( 'Header Settings', 'devportfolio' ), 'priority' => 30 ) );
+	$wp_customize->add_setting( 'header_logo_text', array( 'default' => 'DP', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'header_logo_text', array( 'label' => __( 'Logo Initials', 'devportfolio' ), 'section' => 'devportfolio_header', 'type' => 'text' ) );
+	$wp_customize->add_setting( 'header_bg_image', array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_bg_image', array( 'label' => __( 'Header Banner', 'devportfolio' ), 'section' => 'devportfolio_header' ) ) );
+
+	// Hero Section.
+	$wp_customize->add_section( 'devportfolio_hero', array( 'title' => __( 'Hero Section', 'devportfolio' ), 'priority' => 40 ) );
+	$wp_customize->add_setting( 'hero_title', array( 'default' => 'Building Resilience through Code.', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'hero_title', array( 'label' => __( 'Hero Title', 'devportfolio' ), 'section' => 'devportfolio_hero', 'type' => 'text' ) );
+	$wp_customize->add_setting( 'hero_bio', array( 'default' => 'Focused on distributed systems and engineering excellence.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
+	$wp_customize->add_control( 'hero_bio', array( 'label' => __( 'Hero Bio', 'devportfolio' ), 'section' => 'devportfolio_hero', 'type' => 'textarea' ) );
+	$wp_customize->add_setting( 'hero_image', array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'hero_image', array( 'label' => __( 'Profile Image', 'devportfolio' ), 'section' => 'devportfolio_hero' ) ) );
+
+	// Portfolio/Blog.
+	$wp_customize->add_section( 'devportfolio_layout', array( 'title' => __( 'Layout Settings', 'devportfolio' ), 'priority' => 50 ) );
+	$wp_customize->add_setting( 'portfolio_cols', array( 'default' => '3', 'sanitize_callback' => 'absint' ) );
+	$wp_customize->add_control( 'portfolio_cols', array( 'label' => __( 'Portfolio Grid Columns', 'devportfolio' ), 'section' => 'devportfolio_layout', 'type' => 'number' ) );
+
+	// Footer.
+	$wp_customize->add_section( 'devportfolio_footer', array( 'title' => __( 'Footer Settings', 'devportfolio' ), 'priority' => 60 ) );
+	$wp_customize->add_setting( 'footer_copy', array( 'default' => 'Hand-crafted for performance', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'footer_copy', array( 'label' => __( 'Copyright Text', 'devportfolio' ), 'section' => 'devportfolio_footer', 'type' => 'text' ) );
+	$wp_customize->add_setting( 'github_url', array( 'default' => 'https://github.com/danialchoopan', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'github_url', array( 'label' => __( 'GitHub URL', 'devportfolio' ), 'section' => 'devportfolio_footer', 'type' => 'url' ) );
+	$wp_customize->add_setting( 'linkedin_url', array( 'default' => 'https://linkedin.com/in/danialchoopan', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'linkedin_url', array( 'label' => __( 'LinkedIn URL', 'devportfolio' ), 'section' => 'devportfolio_footer', 'type' => 'url' ) );
+}
+add_action( 'customize_register', 'devportfolio_customize_register' );
+
+/**
+ * Programmatic Seed Data.
  */
 function devportfolio_seed_data() {
-	if ( get_option( 'devportfolio_seeded_v4' ) ) {
-		return;
+	if ( get_option( 'devportfolio_seeded_v5' ) ) return;
+
+	$cats = array( 'Systems', 'DevOps', 'Frontend' );
+	foreach ( $cats as $c ) wp_insert_term( $c, 'portfolio_category' );
+
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$id = wp_insert_post( array( 'post_title' => "Project Alpha $i", 'post_content' => 'High-end engineering project details.', 'post_status' => 'publish', 'post_type' => 'portfolio' ) );
+		if ( $id ) update_post_meta( $id, 'tech_stack', 'Go, Docker, AWS' );
 	}
 
-	// Create Categories.
-	$cat_ids = array();
-	$categories = array( 'Systems Architecture', 'Infrastructure', 'Engineering' );
-	foreach ( $categories as $cat ) {
-		$term = wp_insert_term( $cat, 'portfolio_category' );
-		if ( ! is_wp_error( $term ) ) {
-			$cat_ids[ $cat ] = $term['term_id'];
-		}
+	for ( $i = 1; $i <= 2; $i++ ) {
+		wp_insert_post( array( 'post_title' => "Technical Deep Dive #$i", 'post_content' => 'Advanced patterns in scalable systems... <pre><code>const x = 1;</code></pre>', 'post_status' => 'publish' ) );
 	}
 
-	// Seed Portfolios.
-	$portfolios = array(
-		array(
-			'title'   => 'Global Edge Gateway',
-			'excerpt' => 'A low-latency system handling multi-region traffic routing.',
-			'cat'     => 'Infrastructure',
-			'tech'    => 'Go, Rust, AWS',
-		),
-		array(
-			'title'   => 'Distributed Ledger DB',
-			'excerpt' => 'Architecting an immutable transaction pipeline for high-scale fin-tech.',
-			'cat'     => 'Systems Architecture',
-			'tech'    => 'Node.js, PostgreSQL, Kubernetes',
-		),
-	);
-
-	foreach ( $portfolios as $p ) {
-		$post_id = wp_insert_post( array(
-			'post_title'   => $p['title'],
-			'post_content' => 'Deep technical analysis of the solution architecture...',
-			'post_excerpt' => $p['excerpt'],
-			'post_status'  => 'publish',
-			'post_type'    => 'portfolio',
-		) );
-		if ( $post_id ) {
-			update_post_meta( $post_id, 'tech_stack', $p['tech'] );
-			if ( isset( $cat_ids[ $p['cat'] ] ) ) {
-				wp_set_object_terms( $post_id, $cat_ids[ $p['cat'] ], 'portfolio_category' );
-			}
-		}
-	}
-
-	// Seed Blog Posts.
-	$posts = array(
-		array( 'title' => 'The Cost of Abstraction', 'content' => 'Performance trade-offs in modern frameworks... <pre><code>console.log("optimizing");</code></pre>' ),
-		array( 'title' => 'Scaling Node.js Beyond the Event Loop', 'content' => 'Worker threads and multi-process architecture for enterprise applications.' ),
-	);
-
-	foreach ( $posts as $p ) {
-		wp_insert_post( array(
-			'post_title'   => $p['title'],
-			'post_content' => $p['content'],
-			'post_status'  => 'publish',
-			'post_type'    => 'post',
-		) );
-	}
-
-	update_option( 'devportfolio_seeded_v4', true );
+	update_option( 'devportfolio_seeded_v5', true );
 }
 add_action( 'after_switch_theme', 'devportfolio_seed_data' );
-
-/**
- * Register Portfolio Custom Meta Boxes.
- */
-function devportfolio_add_portfolio_meta_boxes() {
-	add_meta_box(
-		'portfolio_details',
-		__( 'Portfolio Details', 'devportfolio' ),
-		'devportfolio_portfolio_meta_box_callback',
-		'portfolio',
-		'normal',
-		'high'
-	);
-}
-add_action( 'add_meta_boxes', 'devportfolio_add_portfolio_meta_boxes' );
-
-function devportfolio_portfolio_meta_box_callback( $post ) {
-	wp_nonce_field( 'devportfolio_portfolio_meta_box', 'devportfolio_portfolio_meta_box_nonce' );
-
-	$tech_stack = get_post_meta( $post->ID, 'tech_stack', true );
-	$github_url = get_post_meta( $post->ID, 'github_url', true );
-
-	echo '<div style="margin-bottom: 20px;">';
-	echo '<label for="tech_stack" style="display:block; font-weight:bold; margin-bottom:5px;">' . esc_html__( 'Technology Stack (comma separated)', 'devportfolio' ) . '</label>';
-	echo '<input type="text" id="tech_stack" name="tech_stack" value="' . esc_attr( $tech_stack ) . '" style="width:100%;" placeholder="e.g. Node.js, Go, Docker">';
-	echo '</div>';
-
-	echo '<div>';
-	echo '<label for="github_url" style="display:block; font-weight:bold; margin-bottom:5px;">' . esc_html__( 'GitHub URL', 'devportfolio' ) . '</label>';
-	echo '<input type="url" id="github_url" name="github_url" value="' . esc_attr( $github_url ) . '" style="width:100%;" placeholder="https://github.com/...">';
-	echo '</div>';
-}
-
-function devportfolio_save_portfolio_meta_box_data( $post_id ) {
-	if ( ! isset( $_POST['devportfolio_portfolio_meta_box_nonce'] ) ) {
-		return;
-	}
-	if ( ! wp_verify_nonce( $_POST['devportfolio_portfolio_meta_box_nonce'], 'devportfolio_portfolio_meta_box' ) ) {
-		return;
-	}
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	if ( ! current_user_can( 'edit_post', $post_id ) ) {
-		return;
-	}
-
-	if ( isset( $_POST['tech_stack'] ) ) {
-		update_post_meta( $post_id, 'tech_stack', sanitize_text_field( $_POST['tech_stack'] ) );
-	}
-	if ( isset( $_POST['github_url'] ) ) {
-		update_post_meta( $post_id, 'github_url', esc_url_raw( $_POST['github_url'] ) );
-	}
-}
-add_action( 'save_post', 'devportfolio_save_portfolio_meta_box_data' );
