@@ -25,13 +25,6 @@
 ![Portfolio Grid](screenshots/portfolio-grid.png)
 *Sleek project cards with tech-stack badges and category classification.*
 
-### ✍️ Technical Logs
-![Blog Single](screenshots/blog-single.png)
-*Optimized for deep-dive technical reading with IDE-like code blocks.*
-
-### 🌍 Global RTL View
-![RTL View](screenshots/rtl-view.png)
-*Native support for Farsi and other RTL languages.*
 
 ## 🛠️ Installation
 
