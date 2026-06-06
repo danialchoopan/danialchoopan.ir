@@ -2,55 +2,60 @@
 
 [![WordPress](https://img.shields.io/badge/WordPress-v6.0+-21759b.svg?logo=wordpress&logoColor=white)](https://wordpress.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v3.0+-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![PHP](https://img.shields.io/badge/PHP-v7.4+-777bb4.svg?logo=php&logoColor=white)](https://php.net)
+[![Zero-Config](https://img.shields.io/badge/Zero--Config-Production--Ready-success.svg)](https://github.com/danialchoopan/devportfolio-pro)
 [![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-blue.svg)](https://opensource.org/licenses/GPL-2.0)
 
-A highly professional, enterprise-grade, custom WordPress theme built for Senior Software Engineers. Designed to showcase high-end coding skills, clean architecture, and technical projects with a minimalist, high-tech aesthetic.
+**DevPortfolio Pro** is a high-end, enterprise-grade WordPress theme specifically architected for Senior Software Engineers. It combines a minimalist, high-tech dark-mode aesthetic with clean architecture principles.
 
-## ✨ Key Features
+## 💎 Visual Showcase
 
-- **Modern Tech Stack:** Built with Tailwind CSS (Utility-first) and modern PHP standards.
-- **Developer-Centric Design:** Dark mode preferred, high typographic hierarchy, and premium code block styling.
-- **Portfolio Custom Post Type:** Dedicated project showcase with category filtering, technology badges, and detailed case study layouts.
-- **Technical Blog:** Optimized for deep-dive technical reading with reading time estimation and scannable layouts.
-- **i18n & RTL Support:** Fully internationalized and optimized for Persian (RTL) and English (LTR) with the 'Vazirmatn' font.
-- **Performance Focused:** Minimalist architecture, lazy loading support, and clean code.
+> **Note:** The images below are placeholders. Please replace the files in the `screenshots/` directory with actual screenshots of your live theme to showcase your unique build.
 
-## 📸 Screenshots
+### 🏠 Home Desktop (Hero & Technical DNA)
+![Home Desktop](screenshots/home-desktop.png)
+*Featuring a high-impact hero section, decorative background blobs, and a grid-patterned technical expertise section.*
 
-| Home Desktop | Portfolio Grid |
-| :---: | :---: |
-| ![Home Desktop](screenshots/home-desktop.png) | ![Portfolio Grid](screenshots/portfolio-grid.png) |
+### 📂 Filterable Portfolio Repository
+![Portfolio Grid](screenshots/portfolio-grid.png)
+*Sleek project cards with category badges, technology stack tags, and integrated case study analysis.*
 
-| RTL View (Persian) | Blog Single |
-| :---: | :---: |
-| ![RTL View](screenshots/rtl-view.png) | ![Blog Single](screenshots/blog-single.png) |
+### ✍️ Premium Technical Blog
+![Blog Single](screenshots/blog-single.png)
+*Optimized for deep-dive technical reading with stylized code blocks, reading time estimation, and high-end typography.*
 
-## 🛠️ Installation
+### 🌍 Global RTL / Persian View
+![RTL View](screenshots/rtl-view.png)
+*Seamless internationalization and RTL support powered by the Vazirmatn font.*
 
-1. **Clone the repository:**
+## ✨ Premium Features
+
+- **Zero-Config Integration:** No NPM, no build steps. Works out-of-the-box with properly enqueued Tailwind CSS and Typography plugins.
+- **Programmatic Seed Data:** Automatically populates your site with sample portfolios, blog posts, and menus upon activation.
+- **Premium Aesthetic:** Modern dark-mode (Zinc/Slate) with Indigo and Emerald accents, smooth transitions, and subtle grid patterns.
+- **Advanced Portfolio CPT:** Dedicated architecture for project showcases including custom fields for GitHub links and tech stacks.
+- **Vazirmatn Typography:** Dynamic font integration for flawless Latin and Non-Latin script rendering.
+
+## 🛠️ Installation (One-Click Ready)
+
+1. **Upload via Dashboard:**
+   - Compress the theme folder into a `.zip` file.
+   - Go to **Appearance > Themes > Add New > Upload Theme**.
+   - Choose the file and click **Install Now**.
+
+2. **Clone directly:**
    ```bash
    cd wp-content/themes
    git clone https://github.com/danialchoopan/devportfolio-pro.git
    ```
 
-2. **Activate the theme:**
-   Log in to your WordPress dashboard, navigate to **Appearance > Themes**, and activate **DevPortfolio Pro**.
+3. **Activate & Auto-Seed:**
+   - Once activated, the theme will automatically create sample projects, blog posts, and set up your navigation menu and front page.
 
-3. **Configure Navigation:**
-   Go to **Appearance > Menus** and create your menus. Assign them to the **Primary Menu** and **Footer Menu** locations.
+## ⚙️ Development Standards
 
-4. **Add Content:**
-   - Create your technical blog posts under **Posts**.
-   - Showcase your projects using the **Portfolios** menu item. Use custom fields like `tech_stack`, `github_url`, `live_url`, and `challenge` for enhanced project details.
-
-## ⚙️ Development & Customization
-
-This theme uses Tailwind CSS via CDN for rapid development. For production use, it is recommended to compile Tailwind locally:
-
-1. Install dependencies: `npm install`
-2. Compile styles: `npm run build`
-3. The `functions.php` is configured to easily switch between CDN and compiled CSS.
+- **Security:** Strict adherence to WP standards (escaping all outputs, direct file access prevention).
+- **Hooks:** Extensible architecture using standard WordPress hooks.
+- **Performance:** Optimized asset enqueuing and minimalist core.
 
 ## 📝 License
 
