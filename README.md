@@ -9,6 +9,8 @@
 
 ## 💎 Visual Showcase
 
+> **Note:** The images below are placeholders. Please replace the files in the `screenshots/` directory with actual screenshots of your live theme to showcase your unique build.
+
 ### 🏠 Home Desktop (Hero & Technical DNA)
 ![Home Desktop](screenshots/home-desktop.png)
 *Featuring a high-impact hero section, decorative background blobs, and a grid-patterned technical expertise section.*
