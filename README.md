@@ -29,7 +29,7 @@
 1. **Clone the repository:**
    ```bash
    cd wp-content/themes
-   git clone https://github.com/danialchoopan/devportfolio-pro.git
+   git clone https://github.com/danialchoopan/danialchoopan.git
    ```
 
 2. **Activate the theme:**
