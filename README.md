@@ -13,6 +13,7 @@
 - **Portfolio Custom Post Type:** Dedicated project showcase with category filtering and detailed case study layouts.
 - **Technical Blog:** Scannable log layouts with reading time estimation and premium code block styling.
 - **High Performance:** Minimalist architecture with properly enqueued assets and clean code standards.
+- **Instant Setup:** Programmatic seeding creates technical projects and blog posts upon theme activation.
 
 ## 💎 Visual Showcase
 
@@ -47,7 +48,7 @@
    Create your menus under **Appearance > Menus** and assign them to the **Primary Menu** and **Footer Menu** locations.
 
 4. **Initialize Content:**
-   Start adding your technical projects under **Portfolios** and your blog posts under **Posts**.
+   The theme automatically seeds sample projects and posts upon activation to ensure your site never starts empty.
 
 ## ⚙️ Technical Standards
 
