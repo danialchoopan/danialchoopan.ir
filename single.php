@@ -18,37 +18,37 @@ get_header(); ?>
 						<span><?php echo esc_html( devportfolio_reading_time( get_the_content() ) ); ?> <?php esc_html_e( 'min read', 'devportfolio' ); ?></span>
 					</div>
 
-					<h1 class="text-5xl md:text-7xl font-black mb-12 tracking-tighter text-white leading-[0.95]">
+					<h1 class="text-5xl md:text-7xl font-black mb-12 tracking-tighter text-zinc-900 dark:text-white leading-[0.95]">
 						<?php the_title(); ?>
 					</h1>
 
-					<div class="flex items-center justify-center gap-4 text-xs font-black uppercase tracking-widest">
-						<span class="text-zinc-500"><?php esc_html_e( 'Log Author //', 'devportfolio' ); ?></span>
-						<span class="text-white"><?php the_author(); ?></span>
+					<div class="flex items-center justify-center gap-4 text-xs font-black uppercase tracking-widest text-zinc-500">
+						<span class="text-zinc-400 dark:text-zinc-600"><?php esc_html_e( 'Log Author //', 'devportfolio' ); ?></span>
+						<span class="text-zinc-900 dark:text-white"><?php the_author(); ?></span>
 					</div>
 				</header>
 
-				<div class="prose prose-zinc prose-invert max-w-none
-							prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-white
-							prose-p:text-zinc-400 prose-p:text-lg prose-p:leading-relaxed
+				<div class="prose prose-zinc dark:prose-invert max-w-none
+							prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-zinc-900 dark:prose-headings:text-white
+							prose-p:text-zinc-700 dark:prose-p:text-zinc-400 prose-p:text-lg prose-p:leading-relaxed
 							prose-a:text-primary prose-a:no-underline
 							prose-pre:bg-zinc-900 prose-pre:rounded-2xl prose-pre:border prose-pre:border-zinc-800 prose-pre:p-10
 							prose-code:text-primary prose-code:before:content-none prose-code:after:content-none">
 					<?php the_content(); ?>
 				</div>
 
-				<footer class="mt-32 pt-16 border-t border-zinc-900 flex justify-between items-center">
+				<footer class="mt-32 pt-16 border-t border-zinc-200 dark:border-zinc-900 flex justify-between items-center">
 					<div class="flex gap-6">
 						<?php
 						$tags = get_the_tags();
 						if ( $tags ) {
 							foreach ( $tags as $tag ) {
-								echo '<span class="text-[9px] font-black uppercase tracking-widest text-zinc-600">#' . esc_html( $tag->name ) . '</span>';
+								echo '<span class="text-[9px] font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-600">#' . esc_html( $tag->name ) . '</span>';
 							}
 						}
 						?>
 					</div>
-					<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>" class="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-all">
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>" class="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all">
 						<?php esc_html_e( '// Return to Index', 'devportfolio' ); ?>
 					</a>
 				</footer>
