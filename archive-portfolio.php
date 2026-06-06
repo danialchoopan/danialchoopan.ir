@@ -1,6 +1,6 @@
 <?php
 /**
- * Portfolio Archive - High Performance Edition
+ * The template for displaying portfolio archive pages
  *
  * @package DevPortfolio
  */
@@ -11,15 +11,15 @@ get_header(); ?>
 	<div class="container mx-auto px-6 relative z-10">
 		<header class="max-w-4xl mb-32">
 			<h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter text-white uppercase"><?php esc_html_e( 'Systems', 'devportfolio' ); ?></h1>
-			<p class="text-xl text-zinc-500 font-medium leading-relaxed"><?php esc_html_e( 'A repository of technical solutions and engineering patterns.', 'devportfolio' ); ?></p>
+			<p class="text-xl text-zinc-500 font-medium leading-relaxed max-w-2xl"><?php esc_html_e( 'A repository of technical solutions and engineering patterns.', 'devportfolio' ); ?></p>
 		</header>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 				<article class="group relative bg-zinc-900/30 border border-zinc-800 rounded-[40px] p-12 hover:border-primary/30 transition-all duration-700">
-					<div class="flex items-center justify-between mb-10">
-						<div class="w-10 h-10 text-primary/40"><?php echo devportfolio_get_svg('terminal'); ?></div>
-						<span class="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-600">
+					<div class="flex items-center justify-between mb-10 text-zinc-600">
+						<svg class="w-10 h-10 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+						<span class="text-[9px] font-black uppercase tracking-[0.3em]">
 							<?php $t = get_the_terms(get_the_ID(), 'portfolio_category'); if($t) echo esc_html($t[0]->name); ?>
 						</span>
 					</div>
@@ -45,7 +45,7 @@ get_header(); ?>
 					<div class="flex items-center justify-between pt-10 border-t border-zinc-900">
 						<a href="<?php the_permalink(); ?>" class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-white group-hover:gap-6 transition-all">
 							<?php esc_html_e( 'System Specs', 'devportfolio' ); ?>
-							<div class="w-4 h-4 text-primary"><?php echo devportfolio_get_svg('arrow-right'); ?></div>
+							<svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
 						</a>
 					</div>
 				</article>
