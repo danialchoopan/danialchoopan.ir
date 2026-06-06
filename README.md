@@ -1,4 +1,4 @@
-# DevPortfolio Pro 🚀
+# DevPortfolio Danial 🚀
 
 [![WordPress](https://img.shields.io/badge/WordPress-v6.0+-21759b.svg?logo=wordpress&logoColor=white)](https://wordpress.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v3.0+-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
