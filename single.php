@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Technical Post - High Performance Edition
+ * The template for displaying all single posts
  *
  * @package DevPortfolio
  */
@@ -23,7 +23,7 @@ get_header(); ?>
 					</h1>
 
 					<div class="flex items-center justify-center gap-4 text-xs font-black uppercase tracking-widest">
-						<span class="text-zinc-500"><?php esc_html_e( 'System Engineer //', 'devportfolio' ); ?></span>
+						<span class="text-zinc-500"><?php esc_html_e( 'Log Author //', 'devportfolio' ); ?></span>
 						<span class="text-white"><?php the_author(); ?></span>
 					</div>
 				</header>
@@ -38,17 +38,18 @@ get_header(); ?>
 				</div>
 
 				<footer class="mt-32 pt-16 border-t border-zinc-900 flex justify-between items-center">
-					<div class="flex gap-4">
+					<div class="flex gap-6">
 						<?php
-						$social_links = devportfolio_get_social_links();
-						foreach ( $social_links as $platform => $url ) : ?>
-							<a href="<?php echo esc_url( $url ); ?>" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-600 hover:text-white transition-all">
-								<div class="w-5 h-5"><?php echo devportfolio_get_svg( $platform ); ?></div>
-							</a>
-						<?php endforeach; ?>
+						$tags = get_the_tags();
+						if ( $tags ) {
+							foreach ( $tags as $tag ) {
+								echo '<span class="text-[9px] font-black uppercase tracking-widest text-zinc-600">#' . esc_html( $tag->name ) . '</span>';
+							}
+						}
+						?>
 					</div>
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>" class="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-all">
-						<?php esc_html_e( '// Back to Logs', 'devportfolio' ); ?>
+						<?php esc_html_e( '// Return to Index', 'devportfolio' ); ?>
 					</a>
 				</footer>
 			</article>
