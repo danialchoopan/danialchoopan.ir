@@ -18,7 +18,9 @@
 ## 💎 Visual Showcase
 
 ### 🏠 Home Desktop
+
 ![Home Desktop](screenshots/home-desktop.png)
+
 *Featuring a high-impact hero section and technical competency grid.*
 
 
