@@ -34,17 +34,10 @@ get_header(); ?>
 									prose-p:text-zinc-700 dark:prose-p:text-zinc-400 prose-p:text-xl prose-p:leading-relaxed
 									prose-a:text-accent prose-a:no-underline">
 
-							<div class="flex items-center gap-4 mb-10">
-								<h2 class="text-4xl m-0 tracking-tighter uppercase"><?php esc_html_e( 'Problem', 'devportfolio' ); ?></h2>
-								<div class="h-px flex-1 bg-zinc-200 dark:bg-zinc-900 mt-2"></div>
+							<div class="mb-20">
+								<?php the_excerpt(); ?>
+								<?php the_content(); ?>
 							</div>
-							<div class="mb-20"><?php the_excerpt(); ?></div>
-
-							<div class="flex items-center gap-4 mb-10">
-								<h2 class="text-4xl m-0 tracking-tighter uppercase"><?php esc_html_e( 'Solution', 'devportfolio' ); ?></h2>
-								<div class="h-px flex-1 bg-zinc-200 dark:bg-zinc-900 mt-2"></div>
-							</div>
-							<div class="mb-20"><?php the_content(); ?></div>
 						</div>
 					</div>
 
