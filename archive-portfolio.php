@@ -14,7 +14,7 @@ get_header(); ?>
 			<p class="text-xl text-zinc-600 dark:text-zinc-500 font-medium leading-relaxed max-w-2xl"><?php esc_html_e( 'A repository of technical solutions and engineering patterns.', 'devportfolio' ); ?></p>
 		</header>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+		<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-16">
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 				<article class="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-[40px] overflow-hidden hover:border-primary/30 transition-all duration-700">
 					<?php if ( has_post_thumbnail() ) : ?>
