@@ -6,13 +6,16 @@
 
 **DevPortfolio Pro** is a highly professional, enterprise-grade custom WordPress theme architected for Senior Software Engineers. It features a minimalist, high-tech aesthetic with a focus on performance, accessibility, and technical depth.
 
-## ✨ Core Features
+## ✨ Core Features (New & Enhanced)
 
-- **Utility-First Styling:** Built with Tailwind CSS for rapid and maintainable UI development.
-- **RTL & i18n Support:** Fully optimized for both English (LTR) and Persian (RTL) using the Vazirmatn font.
-- **Portfolio Custom Post Type:** Dedicated project showcase with category filtering and detailed case study layouts.
-- **Technical Blog:** Scannable log layouts with reading time estimation and premium code block styling.
-- **High Performance:** Minimalist architecture with properly enqueued assets and clean code standards.
+- **🚀 Local Asset Architecture:** Completely independent of external CDNs. Tailwind CSS and Vazirmatn fonts are bundled locally for maximum privacy and performance.
+- **🛠️ Theme Options Panel:** A dedicated settings page in the Admin Dashboard for managing:
+  - **Site Language:** Instant toggle between English (LTR) and Farsi (RTL).
+  - **Contact Info:** Global management of email and phone numbers.
+  - **Social Matrix:** Centralized links for GitHub and LinkedIn.
+- **📩 Advanced Contact System:** Custom-built contact form handling that saves messages directly to a "Contact Messages" CPT and sends email notifications.
+- **📐 Optimized Portfolio Grid:** Responsive grid layout (1, 3, or 4 columns) for project showcases.
+- **📄 Custom Page Templates:** Professionally designed templates for **Contact Me** and **About Me** pages.
 - **Accessibility Optimized:** Sharp text contrast in both dark and light modes for maximum readability.
 
 ## 💎 Visual Showcase
@@ -24,7 +27,7 @@
 *Featuring a high-impact hero section and technical competency grid.*
 
 
-## 🛠️ Installation
+## 🛠️ Installation & Setup Guide
 
 1. **Clone the repository:**
    ```bash
@@ -35,17 +38,32 @@
 2. **Activate the theme:**
    Log in to your WordPress dashboard, navigate to **Appearance > Themes**, and activate **DevPortfolio Pro**.
 
-3. **Configure Navigation:**
-   Create your menus under **Appearance > Menus** and assign them to the **Primary Menu** and **Footer Menu** locations.
+3. **Configure Theme Options:**
+   Go to **Theme Options** in the sidebar. Set your preferred site language, contact email, phone number, and social media links. These will be automatically displayed on the contact page.
 
-4. **Initialize Content:**
-   Start adding your technical projects under **Portfolios** and your blog posts under **Posts**.
+4. **Setup Contact Me Page:**
+   - Go to **Pages > Add New**.
+   - Set the title to "Contact Me".
+   - In the **Page Attributes** section on the right, select the **Contact Me** template.
+   - Publish the page. It will now show your contact info and the functional form.
+
+5. **Setup About Me Page:**
+   - Go to **Pages > Add New**.
+   - Set the title to "About Me".
+   - Select the **About Me** template in **Page Attributes**.
+   - Add your bio content in the editor. The template will automatically display your technical DNA cards on the side.
+
+6. **Manage Messages:**
+   All submissions from the contact form are stored in the **Messages** menu in your WordPress dashboard. You can view, manage, and reply to inquiries from there.
+
+7. **Configure Navigation:**
+   Create your menus under **Appearance > Menus** and assign them to the **Primary Menu** and **Footer Menu** locations.
 
 ## ⚙️ Technical Standards
 
-- **Security:** Strict adherence to WordPress standards (escaping, direct access prevention).
-- **Hooks:** Extensible architecture using standard WordPress hooks (`wp_head`, `wp_footer`).
-- **Typography:** Dynamic integration of the 'Vazirmatn' font family.
+- **Security:** Strict adherence to WordPress standards (escaping, sanitization, nonces).
+- **Hooks:** Extensible architecture using standard WordPress hooks.
+- **Performance:** Pre-compiled local CSS and locally hosted assets for sub-second load times.
 
 ## 📝 License
 
