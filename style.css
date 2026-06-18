@@ -1,19 +1,14 @@
 /*
-Theme Name: DevPortfolio Pro
+Theme Name: Vibecode Studio
 Theme URI: https://github.com/danialchoopan/devportfolio-pro
 Author: Danial Choopan
 Author URI: https://danialchoopan.ir
-Description: A highly professional, enterprise-grade, custom WordPress theme for Senior Software Engineers. Built with Tailwind CSS and Vazirmatn font.
-Version: 1.0.0
+Description: A premium Cyber-Brutalism theme for Senior Software Engineers and Studios. Redesigned to match the Vibecode Studio aesthetic.
+Version: 2.0.0
 Text Domain: devportfolio
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: custom-menu, featured-images, translation-ready, rtl-language-support, sticky-post, threaded-comments
+Tags: dark, custom-menu, featured-images, translation-ready, rtl-language-support, sticky-post, threaded-comments
 
 This theme uses Tailwind CSS for styling.
 */
-
-/* Tailwind Directives - Used for local compilation if needed */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
