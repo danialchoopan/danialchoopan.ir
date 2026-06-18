@@ -1,118 +1,54 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="scroll-smooth">
+<html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
-	<script>
-		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-		}
-	</script>
-	<style>
-		.grid-pattern {
-			background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-			background-size: 40px 40px;
-		}
-		.light .grid-pattern, :not(.dark) .grid-pattern {
-			background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-		}
-	</style>
+    <style>
+        .grid-pattern {
+            background-image: radial-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
 </head>
-<body <?php body_class( 'font-vazir bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-primary/30' ); ?>>
-	<?php wp_body_open(); ?>
 
-	<?php
-	$logo_text = get_theme_mod('header_logo_text', 'DP');
-	?>
-	<header class="sticky top-0 z-50 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-900/50">
-		<div class="container mx-auto px-6 py-5 flex justify-between items-center">
-			<div class="logo">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-xl font-black tracking-tighter flex items-center gap-3 group">
-					<span class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-xs font-black"><?php echo esc_html($logo_text); ?></span>
-					<span class="bg-gradient-to-r from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-500 bg-clip-text text-transparent group-hover:to-primary transition-all duration-500">
-						<?php bloginfo( 'name' ); ?>
-					</span>
-				</a>
-			</div>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
-			<nav class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border/50">
+	<div class="container mx-auto px-6 h-20 flex items-center justify-between">
+		<div class="flex items-center gap-12">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-xl font-black tracking-tighter text-white">
+				VIBECODE_STUDIO
+			</a>
+
+			<nav class="hidden md:flex items-center gap-8">
 				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'primary',
-						'container'      => false,
-						'menu_class'     => 'flex space-x-8 rtl:space-x-reverse font-black text-[11px] uppercase tracking-[0.2em] text-zinc-900 dark:text-zinc-400',
-						'fallback_cb'    => '__return_false',
-						'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-					)
-				);
-				?>
-
-				<div class="flex items-center gap-4 border-l border-zinc-200 dark:border-zinc-800 pl-8 rtl:pl-0 rtl:pr-8 rtl:border-l-0 rtl:border-r">
-					<button id="theme-toggle" class="p-2 text-zinc-900 dark:text-zinc-400 hover:text-primary transition-colors">
-						<svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-						<svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
-					</button>
-
-					<div class="language-switcher flex items-center gap-2">
-						<?php
-						$current_lang = is_rtl() ? 'FA' : 'EN';
-						$target_lang  = is_rtl() ? 'en' : 'fa';
-						$target_label = is_rtl() ? 'EN' : 'FA';
-						?>
-						<span class="text-[9px] font-black px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded"><?php echo esc_html( $current_lang ); ?></span>
-						<a href="?lang=<?php echo esc_attr($target_lang); ?>" class="text-[9px] font-black text-zinc-900 dark:text-zinc-400 hover:text-primary transition-colors uppercase tracking-[0.2em]"><?php echo esc_html( $target_label ); ?></a>
-					</div>
-				</div>
-			</nav>
-
-			<button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 group">
-				<span class="w-5 h-0.5 bg-zinc-900 dark:bg-zinc-400 group-hover:bg-primary transition-all"></span>
-				<span class="w-5 h-0.5 bg-zinc-900 dark:bg-zinc-400 group-hover:bg-primary transition-all"></span>
-			</button>
-		</div>
-
-		<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-8 shadow-2xl">
-			<?php
-			wp_nav_menu(
-				array(
+				wp_nav_menu( array(
 					'theme_location' => 'primary',
 					'container'      => false,
-					'menu_class'     => 'flex flex-col space-y-6 font-black text-sm uppercase tracking-widest text-zinc-900 dark:text-zinc-100',
-					'fallback_cb'    => '__return_false',
-				)
-			);
-			?>
+					'menu_class'     => 'flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-zinc-400',
+					'fallback_cb'    => false,
+					'items_wrap'     => '%3$s',
+				) );
+				?>
+                <!-- Fallback menu if not set -->
+                <?php if ( ! has_nav_menu( 'primary' ) ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-[11px] font-bold uppercase tracking-widest text-white border-b-2 border-primary pb-1">HOME</a>
+                    <a href="#" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">PORTFOLIO</a>
+                    <a href="#" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">BLOG</a>
+                    <a href="#" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">CONTACT</a>
+                <?php endif; ?>
+			</nav>
 		</div>
-	</header>
 
-	<script>
-		const themeToggleBtn = document.getElementById('theme-toggle');
-		const darkIcon = document.getElementById('theme-toggle-dark-icon');
-		const lightIcon = document.getElementById('theme-toggle-light-icon');
+		<div class="flex items-center gap-6">
+			<a href="#" class="hidden sm:block px-4 py-2 bg-primary text-surface text-[10px] font-black uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity">
+				HIRE_ME
+			</a>
+		</div>
+	</div>
+</header>
 
-		if (document.documentElement.classList.contains('dark')) {
-			lightIcon.classList.remove('hidden');
-		} else {
-			darkIcon.classList.remove('hidden');
-		}
-
-		themeToggleBtn.addEventListener('click', function() {
-			darkIcon.classList.toggle('hidden');
-			lightIcon.classList.toggle('hidden');
-			if (document.documentElement.classList.contains('dark')) {
-				document.documentElement.classList.remove('dark');
-				localStorage.theme = 'light';
-			} else {
-				document.documentElement.classList.add('dark');
-				localStorage.theme = 'dark';
-			}
-		});
-
-		document.getElementById('menu-toggle').addEventListener('click', function() {
-			document.getElementById('mobile-menu').classList.toggle('hidden');
-		});
-	</script>
+<main class="pt-20 min-h-screen">

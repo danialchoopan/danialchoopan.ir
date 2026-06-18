@@ -1,31 +1,85 @@
-<section class="py-32 bg-white dark:bg-zinc-950">
-	<div class="container mx-auto px-6">
-		<h2 class="text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-[0.2em] mb-20 flex items-center gap-6">
-			<span><?php esc_html_e( 'Recent Logs', 'devportfolio' ); ?></span>
-			<div class="h-px flex-1 bg-zinc-100 dark:bg-zinc-900"></div>
-		</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-			<?php
-			$b_query = new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => 2 ) );
-			if ( $b_query->have_posts() ) : while ( $b_query->have_posts() ) : $b_query->the_post(); ?>
-				<article class="group">
-					<div class="text-[9px] font-black text-primary uppercase tracking-widest mb-6 flex items-center gap-3">
-						<span><?php echo get_the_date(); ?></span>
-						<span class="w-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full"></span>
-						<span><?php echo esc_html( devportfolio_reading_time( get_the_content() ) ); ?> <?php esc_html_e( 'min read', 'devportfolio' ); ?></span>
-					</div>
-					<h3 class="text-3xl font-black text-zinc-900 dark:text-white group-hover:text-primary transition-colors leading-tight mb-6">
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-					</h3>
-					<p class="text-zinc-600 dark:text-zinc-500 font-medium mb-8 line-clamp-2"><?php echo esc_html(get_the_excerpt()); ?></p>
-					<a href="<?php the_permalink(); ?>" class="text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-3 group-hover:gap-5 transition-all">
-						<?php esc_html_e( 'Read Log', 'devportfolio' ); ?>
-						<svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-					</a>
-				</article>
-			<?php endwhile; wp_reset_postdata(); else : ?>
-				<p class="text-zinc-500 uppercase font-black tracking-widest"><?php esc_html_e( 'No logs found.', 'devportfolio' ); ?></p>
-			<?php endif; ?>
-		</div>
-	</div>
+<section class="py-24 bg-surface-darkest">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col items-end mb-16 text-right rtl">
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">آخرین نوشته‌ها</span>
+            <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter">وبلاگ فنی</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <?php
+            $args = array(
+                'posts_per_page' => 4,
+            );
+            $query = new WP_Query($args);
+            $posts = $query->posts;
+
+            if ($posts) :
+                $featured = array_shift($posts);
+                ?>
+                <!-- Featured Post -->
+                <div class="lg:col-span-7">
+                    <article class="group relative bg-surface border border-border overflow-hidden">
+                        <div class="aspect-video relative overflow-hidden">
+                            <?php if (has_post_thumbnail($featured->ID)) : ?>
+                                <?php echo get_the_post_thumbnail($featured->ID, 'large', ['class' => 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-700']); ?>
+                            <?php else : ?>
+                                <div class="w-full h-full bg-surface-high grid-pattern opacity-20"></div>
+                            <?php endif; ?>
+                            <div class="absolute inset-0 bg-surface/40 group-hover:bg-surface/20 transition-colors"></div>
+                        </div>
+
+                        <div class="p-8 text-right rtl">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="px-2 py-1 bg-primary text-surface text-[8px] font-bold uppercase tracking-widest">FEATURED_POST</span>
+                                <time class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest"><?php echo get_the_date('', $featured->ID); ?></time>
+                            </div>
+
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6 leading-tight">
+                                <a href="<?php echo get_permalink($featured->ID); ?>" class="hover:text-primary transition-colors">
+                                    <?php echo get_the_title($featured->ID); ?>
+                                </a>
+                            </h3>
+
+                            <p class="text-zinc-400 mb-8 leading-relaxed line-clamp-3">
+                                <?php echo get_the_excerpt($featured->ID); ?>
+                            </p>
+
+                            <a href="<?php echo get_permalink($featured->ID); ?>" class="inline-flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest group/link">
+                                مطالعه ادامه مطلب
+                                <svg class="w-4 h-4 text-primary group-hover/link:translate-x-[-4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Secondary Posts -->
+                <div class="lg:col-span-5 space-y-6">
+                    <?php foreach ($posts as $post) : ?>
+                        <article class="flex gap-6 items-start bg-surface/50 border border-border p-4 hover:border-primary transition-colors text-right rtl">
+                            <div class="w-24 h-24 flex-shrink-0 bg-surface border border-border overflow-hidden">
+                                <?php if (has_post_thumbnail($post->ID)) : ?>
+                                    <?php echo get_the_post_thumbnail($post->ID, 'thumbnail', ['class' => 'w-full h-full object-cover']); ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[8px] font-bold text-primary uppercase tracking-widest"><?php echo get_the_category($post->ID)[0]->name ?? 'TECH'; ?></span>
+                                    <time class="text-[8px] text-zinc-500 font-bold uppercase tracking-widest"><?php echo get_the_date('', $post->ID); ?></time>
+                                </div>
+                                <h4 class="text-lg font-black text-white mb-2 leading-snug">
+                                    <a href="<?php echo get_permalink($post->ID); ?>" class="hover:text-primary transition-colors">
+                                        <?php echo get_the_title($post->ID); ?>
+                                    </a>
+                                </h4>
+                                <div class="flex items-center gap-2 text-[8px] text-zinc-500 font-bold uppercase tracking-widest">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <?php echo devportfolio_reading_time($post->post_content); ?> دقیقه مطالعه
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
 </section>

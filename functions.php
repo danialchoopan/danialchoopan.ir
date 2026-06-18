@@ -1,12 +1,12 @@
 <?php
 /**
- * DevPortfolio Pro functions and definitions
+ * Vibecode Studio functions and definitions
  *
- * @package DevPortfolio
+ * @package VibecodeStudio
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	return;
 }
 
 /**
@@ -65,7 +65,6 @@ function devportfolio_register_cpts() {
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'capability_type'    => 'post',
-		'capabilities'       => array( 'create_posts' => false ), // No manual creation
 		'map_meta_cap'       => true,
 		'supports'           => array( 'title', 'editor' ),
 	);
@@ -115,25 +114,9 @@ function devportfolio_settings_init() {
 	);
 
 	add_settings_field(
-		'contact_phone',
-		__( 'Phone Number', 'devportfolio' ),
-		'devportfolio_phone_render',
-		'devportfolio_options',
-		'devportfolio_general_section'
-	);
-
-	add_settings_field(
 		'github_url',
 		__( 'GitHub URL', 'devportfolio' ),
 		'devportfolio_github_render',
-		'devportfolio_options',
-		'devportfolio_general_section'
-	);
-
-	add_settings_field(
-		'linkedin_url',
-		__( 'LinkedIn URL', 'devportfolio' ),
-		'devportfolio_linkedin_render',
 		'devportfolio_options',
 		'devportfolio_general_section'
 	);
@@ -144,8 +127,8 @@ function devportfolio_language_render() {
 	$options = get_option( 'devportfolio_settings' );
 	?>
 	<select name='devportfolio_settings[site_language]'>
-		<option value='en' <?php selected( $options['site_language'] ?? 'en', 'en' ); ?>>English</option>
-		<option value='fa' <?php selected( $options['site_language'] ?? 'en', 'fa' ); ?>>Farsi</option>
+		<option value='fa' <?php selected( $options['site_language'] ?? 'fa', 'fa' ); ?>>Farsi</option>
+		<option value='en' <?php selected( $options['site_language'] ?? 'fa', 'en' ); ?>>English</option>
 	</select>
 	<?php
 }
@@ -153,35 +136,21 @@ function devportfolio_language_render() {
 function devportfolio_email_render() {
 	$options = get_option( 'devportfolio_settings' );
 	?>
-	<input type='email' name='devportfolio_settings[contact_email]' value='<?php echo esc_attr( $options['contact_email'] ?? '' ); ?>' class='regular-text'>
-	<?php
-}
-
-function devportfolio_phone_render() {
-	$options = get_option( 'devportfolio_settings' );
-	?>
-	<input type='text' name='devportfolio_settings[contact_phone]' value='<?php echo esc_attr( $options['contact_phone'] ?? '' ); ?>' class='regular-text'>
+	<input type='email' name='devportfolio_settings[contact_email]' value='<?php echo esc_attr( $options['contact_email'] ?? 'studio@vibecode.ir' ); ?>' class='regular-text'>
 	<?php
 }
 
 function devportfolio_github_render() {
 	$options = get_option( 'devportfolio_settings' );
 	?>
-	<input type='url' name='devportfolio_settings[github_url]' value='<?php echo esc_attr( $options['github_url'] ?? '' ); ?>' class='regular-text'>
-	<?php
-}
-
-function devportfolio_linkedin_render() {
-	$options = get_option( 'devportfolio_settings' );
-	?>
-	<input type='url' name='devportfolio_settings[linkedin_url]' value='<?php echo esc_attr( $options['linkedin_url'] ?? '' ); ?>' class='regular-text'>
+	<input type='url' name='devportfolio_settings[github_url]' value='<?php echo esc_attr( $options['github_url'] ?? 'https://github.com/Vibecode-dev' ); ?>' class='regular-text'>
 	<?php
 }
 
 function devportfolio_options_page() {
 	?>
 	<form action='options.php' method='post'>
-		<h2>DevPortfolio Pro Options</h2>
+		<h2>Vibecode Studio Options</h2>
 		<?php
 		settings_fields( 'devportfolio_options_group' );
 		do_settings_sections( 'devportfolio_options' );
@@ -196,7 +165,7 @@ function devportfolio_options_page() {
  */
 function devportfolio_locale( $locale ) {
 	$options = get_option( 'devportfolio_settings' );
-	$lang = $options['site_language'] ?? 'en';
+	$lang = $options['site_language'] ?? 'fa';
 
 	if ( 'fa' === $lang ) {
 		return 'fa_IR';
@@ -209,8 +178,8 @@ add_filter( 'locale', 'devportfolio_locale' );
  * Add RTL/LTR and Font classes to body.
  */
 function devportfolio_body_classes( $classes ) {
-	$options = get_option( 'devportfolio_settings' );
-	$lang = $options['site_language'] ?? 'en';
+	$options_o = get_option( 'devportfolio_settings' );
+	$lang = isset($options_o['site_language']) ? $options_o['site_language'] : 'fa';
 
 	if ( 'fa' === $lang ) {
 		$classes[] = 'rtl';
@@ -218,7 +187,7 @@ function devportfolio_body_classes( $classes ) {
 		$classes[] = 'ltr';
 	}
 
-	$classes[] = 'font-vazir';
+	$classes[] = 'bg-surface text-white selection:bg-primary selection:text-surface font-vazir';
 	return $classes;
 }
 add_filter( 'body_class', 'devportfolio_body_classes' );
@@ -233,7 +202,7 @@ function devportfolio_setup() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'custom-logo' );
 
-	register_nav_menus( array( 'primary' => __( 'Primary Menu', 'devportfolio' ), 'footer' => __( 'Footer Menu', 'devportfolio' ) ) );
+	register_nav_menus( array( 'primary' => __( 'Primary Menu', 'devportfolio' ) ) );
 }
 add_action( 'after_setup_theme', 'devportfolio_setup' );
 
@@ -241,9 +210,7 @@ add_action( 'after_setup_theme', 'devportfolio_setup' );
  * Enqueue scripts and styles.
  */
 function devportfolio_scripts() {
-	// Local Assets
-	wp_enqueue_style( 'devportfolio-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.6.0' );
-	wp_enqueue_style( 'devportfolio-style', get_stylesheet_uri(), array(), '1.6.0' );
+	wp_enqueue_style( 'devportfolio-main', get_template_directory_uri() . '/assets/css/main.css', array(), '2.0.0' );
 }
 add_action( 'wp_enqueue_scripts', 'devportfolio_scripts' );
 
@@ -258,19 +225,36 @@ function devportfolio_reading_time( $content ) {
  * WP Customizer implementation.
  */
 function devportfolio_customize_register( $wp_customize ) {
-	// Hero Section
 	$wp_customize->add_section( 'devportfolio_hero', array( 'title' => __( 'Hero Section', 'devportfolio' ), 'priority' => 30 ) );
-	$wp_customize->add_setting( 'hero_title', array( 'default' => 'Building Resilience through Code.', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_setting( 'hero_title', array( 'default' => 'برنامه‌نویسی با حالِ تو', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'hero_title', array( 'label' => __( 'Hero Title', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
-	$wp_customize->add_setting( 'hero_bio', array( 'default' => 'Focused on high-performance distributed systems and engineering excellence.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
+
+	$wp_customize->add_setting( 'hero_bio', array( 'default' => 'ویب‌کد استودیو، فضایی برای خلق نرم‌افزارهای مدرن با رویکردی نوآورانه. ما ایده‌های فنی شما را به کدهای تمیز و قابل مقیاس تبدیل می‌کنیم.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
 	$wp_customize->add_control( 'hero_bio', array( 'label' => __( 'Hero Bio', 'devportfolio' ), 'section' => 'devportfolio_hero', 'type' => 'textarea' ) );
-	$wp_customize->add_setting( 'hero_cta_primary_text', array( 'default' => 'Analyze Work', 'sanitize_callback' => 'sanitize_text_field' ) );
+
+	$wp_customize->add_setting( 'hero_cta_primary_text', array( 'default' => 'شروع پروژه', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'hero_cta_primary_text', array( 'label' => __( 'Primary CTA Text', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
+
 	$wp_customize->add_setting( 'hero_cta_primary_url', array( 'default' => '#', 'sanitize_callback' => 'esc_url_raw' ) );
 	$wp_customize->add_control( 'hero_cta_primary_url', array( 'label' => __( 'Primary CTA URL', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
 
+    $wp_customize->add_setting( 'hero_cta_secondary_text', array( 'default' => 'مشاهده نمونه کارها', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'hero_cta_secondary_text', array( 'label' => __( 'Secondary CTA Text', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
+
 	$wp_customize->add_section( 'devportfolio_homepage', array( 'title' => __( 'Homepage Layout', 'devportfolio' ), 'priority' => 40 ) );
-	$wp_customize->add_setting( 'homepage_order', array( 'default' => 'hero,tech,portfolio,blog', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_setting( 'homepage_order', array( 'default' => 'hero,tech,stats,portfolio,blog', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'homepage_order', array( 'label' => __( 'Section Order', 'devportfolio' ), 'section' => 'devportfolio_homepage' ) );
 }
 add_action( 'customize_register', 'devportfolio_customize_register' );
+
+/**
+ * Helper for Terminal Dots
+ */
+function vibecode_terminal_dots() {
+    return '
+    <div class="flex gap-1.5 mb-4">
+        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+    </div>';
+}

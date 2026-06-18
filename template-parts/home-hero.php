@@ -1,53 +1,65 @@
 <?php
-$hero_title = get_theme_mod('hero_title', 'Building Resilience through Code.');
-$hero_bio   = get_theme_mod('hero_bio', 'Focused on high-performance distributed systems and engineering excellence.');
-$hero_bg    = get_theme_mod('hero_bg_img');
-$hero_opacity = get_theme_mod('hero_bg_opacity', 20) / 100;
-$primary_cta_text = get_theme_mod('hero_cta_primary_text', 'Analyze Work');
+$hero_title = get_theme_mod('hero_title', 'برنامه‌نویسی با حالِ تو');
+$hero_bio   = get_theme_mod('hero_bio', 'ویب‌کد استودیو، فضایی برای خلق نرم‌افزارهای مدرن با رویکردی نوآورانه. ما ایده‌های فنی شما را به کدهای تمیز و قابل مقیاس تبدیل می‌کنیم.');
+$primary_cta_text = get_theme_mod('hero_cta_primary_text', 'شروع پروژه');
 $primary_cta_url  = get_theme_mod('hero_cta_primary_url', '#');
-$secondary_cta_text = get_theme_mod('hero_cta_secondary_text', 'Technical Blog');
+$secondary_cta_text = get_theme_mod('hero_cta_secondary_text', 'مشاهده نمونه کارها');
 $secondary_cta_url  = get_theme_mod('hero_cta_secondary_url', '#');
-$github_url = get_theme_mod('github_url', '#');
-$linkedin_url = get_theme_mod('linkedin_url', '#');
 ?>
-<section class="relative min-h-[80vh] flex items-center pt-20 overflow-hidden grid-pattern">
-	<?php if($hero_bg): ?>
-	<div class="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-700" style="background-image: url('<?php echo esc_url($hero_bg); ?>'); opacity: <?php echo esc_attr($hero_opacity); ?>;"></div>
-	<?php endif; ?>
-	<div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-200/20 to-white dark:via-zinc-950/20 dark:to-zinc-950 z-0"></div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<div class="max-w-4xl">
-			<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-8">
-				<span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-				<span class="text-[10px] font-black uppercase tracking-widest text-accent">Lead Engineer // System Architect</span>
-			</div>
+<section class="relative min-h-[90vh] flex items-center py-20 grid-pattern">
+    <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Terminal Block (Left on Desktop, Top on Mobile) -->
+        <div class="order-2 lg:order-1">
+            <div class="bg-surface-darkest rounded-xl border border-border shadow-2xl overflow-hidden font-mono text-sm leading-relaxed">
+                <div class="bg-surface-high px-4 py-3 border-b border-border flex items-center justify-between">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+                    </div>
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-widest">vibecode_main.py — 64x32</div>
+                </div>
+                <div class="p-6 text-zinc-400 space-y-1">
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">1</span><span><span class="text-secondary">:class</span> <span class="text-primary">VibeStudio</span></span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">2</span><span>    <span class="text-secondary">:def</span> <span class="text-white">__init__</span>(<span class="text-zinc-500">self</span>)</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">3</span><span>        <span class="text-zinc-500">self.vision</span> = <span class="text-secondary">"Pure Excellence"</span></span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">4</span><span>        <span class="text-zinc-500">self.stack</span> = [<span class="text-secondary">"React"</span>, <span class="text-secondary">"Python"</span>, <span class="text-secondary">"Go"</span>]</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">5</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">6</span><span>    <span class="text-secondary">:async def</span> <span class="text-white">build_future</span>(<span class="text-zinc-500">self, project</span>)</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">7</span><span><span class="text-primary">#print</span>(f<span class="text-secondary">"Compiling {project} with ⚡ vibes..."</span>)</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">8</span><span>        <span class="text-white">return await</span> <span class="text-zinc-500">self.deploy</span>(<span class="text-zinc-500">project</span>)</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">9</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">10</span><span>Initialize the studio...</span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">11</span><span>    {}studio = <span class="text-primary">VibeStudio</span></span></div>
+                    <div class="flex gap-4"><span class="text-zinc-700 w-4">12</span><span><span class="text-secondary">#await</span> <span class="text-zinc-500">studio.build_future</span>(<span class="text-secondary">"Your_Dream_App"</span>)</span></div>
+                </div>
+            </div>
+        </div>
 
-			<h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter text-zinc-900 dark:text-white leading-[0.9]">
-				<?php echo esc_html($hero_title); ?>
-			</h1>
+        <!-- Content Block (Right on Desktop) -->
+        <div class="order-1 lg:order-2 text-right rtl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-surface border border-border mb-8">
+                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">SYSTEM.READY()</span>
+                <svg class="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+            </div>
 
-			<p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-12 max-w-2xl leading-relaxed">
-				<?php echo esc_html($hero_bio); ?>
-			</p>
+            <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-[1.1] text-white">
+                <?php echo esc_html($hero_title); ?>
+            </h1>
 
-			<div class="flex flex-wrap items-center gap-6">
-				<a href="<?php echo esc_url($primary_cta_url); ?>" class="px-8 py-4 bg-primary text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
-					<?php echo esc_html($primary_cta_text); ?>
-				</a>
-				<a href="<?php echo esc_url($secondary_cta_url); ?>" class="px-8 py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all border border-zinc-200 dark:border-zinc-800">
-					<?php echo esc_html($secondary_cta_text); ?>
-				</a>
+            <p class="text-zinc-400 text-lg mb-12 max-w-xl ml-auto leading-relaxed">
+                <?php echo esc_html($hero_bio); ?>
+            </p>
 
-				<div class="flex items-center gap-4 ml-4 rtl:ml-0 rtl:mr-4 border-l border-zinc-200 dark:border-zinc-800 pl-8 rtl:pl-0 rtl:pr-8 rtl:border-l-0 rtl:border-r">
-					<a href="<?php echo esc_url($github_url); ?>" class="text-zinc-400 hover:text-primary transition-colors">
-						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-					</a>
-					<a href="<?php echo esc_url($linkedin_url); ?>" class="text-zinc-400 hover:text-primary transition-colors">
-						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="flex flex-wrap items-center justify-end gap-4">
+                <a href="<?php echo esc_url($primary_cta_url); ?>" class="px-8 py-4 bg-primary text-surface text-[12px] font-black uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity">
+                    <?php echo esc_html($primary_cta_text); ?>
+                </a>
+                <a href="<?php echo esc_url($secondary_cta_url); ?>" class="px-8 py-4 border border-border text-white text-[12px] font-black uppercase tracking-widest rounded-sm hover:bg-surface-high transition-colors">
+                    <?php echo esc_html($secondary_cta_text); ?>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>

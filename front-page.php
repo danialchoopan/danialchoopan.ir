@@ -1,35 +1,32 @@
 <?php
 /**
- * The dynamic front page template file
- *
- * @package DevPortfolio
+ * The front page template file
  */
 
-get_header(); ?>
+get_header();
 
-<main>
-	<?php
-	$order_raw = get_theme_mod('homepage_order', 'hero,tech,portfolio,blog');
-	$sections  = explode(',', $order_raw);
+$order = get_theme_mod('homepage_order', 'hero,tech,stats,portfolio,blog');
+$sections = explode(',', $order);
 
-	foreach ($sections as $section) {
-		$section = trim($section);
-		switch ($section) {
-			case 'hero':
-				get_template_part('template-parts/home', 'hero');
-				break;
-			case 'tech':
-				get_template_part('template-parts/home', 'tech');
-				break;
-			case 'portfolio':
-				get_template_part('template-parts/home', 'portfolio');
-				break;
-			case 'blog':
-				get_template_part('template-parts/home', 'blog');
-				break;
-		}
-	}
-	?>
-</main>
+foreach ($sections as $section) {
+    $section = trim($section);
+    switch ($section) {
+        case 'hero':
+            get_template_part('template-parts/home-hero');
+            break;
+        case 'tech':
+            get_template_part('template-parts/home-tech');
+            break;
+        case 'stats':
+            get_template_part('template-parts/home-stats');
+            break;
+        case 'portfolio':
+            get_template_part('template-parts/home-portfolio');
+            break;
+        case 'blog':
+            get_template_part('template-parts/home-blog');
+            break;
+    }
+}
 
-<?php get_footer(); ?>
+get_footer();
