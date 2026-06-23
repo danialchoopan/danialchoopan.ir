@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles Performance optimizations.
  */
 class Performance {
-	private static ?Performance $instance = null;
+	private static $instance = null;
 
-	public static function instance(): Performance {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -22,7 +22,7 @@ class Performance {
 		add_filter( 'wp_handle_upload', [ $this, 'generate_webp_on_upload' ] );
 	}
 
-	public function generate_webp_on_upload( $upload ): array {
+	public function generate_webp_on_upload( $upload ) {
 		if ( $upload['type'] === 'image/jpeg' || $upload['type'] === 'image/png' ) {
             // Logic for WebP generation would go here using GD or Imagick
 		}

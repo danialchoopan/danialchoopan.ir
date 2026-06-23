@@ -9,14 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Daily Coding Challenge Shortcode.
  */
 class Challenge {
-	private static ?Challenge $instance = null;
+	private static $instance = null;
     private array $challenges = [
         [ 'q' => 'Write a function to reverse a string in PHP.', 'diff' => 'Easy' ],
         [ 'q' => 'Explain the Singleton pattern and its usage.', 'diff' => 'Medium' ],
         [ 'q' => 'How does the WordPress Hook system work?', 'diff' => 'Medium' ]
     ];
 
-	public static function instance(): Challenge {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -27,7 +27,7 @@ class Challenge {
 		add_shortcode( 'daily_challenge', [ $this, 'render_challenge' ] );
 	}
 
-	public function render_challenge(): string {
+	public function render_challenge() {
 		$day = (int) date('d');
         $index = $day % count($this->challenges);
         $challenge = $this->challenges[$index];

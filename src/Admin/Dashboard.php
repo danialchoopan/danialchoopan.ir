@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles the custom admin dashboard and settings.
  */
 class Dashboard {
-	private static ?Dashboard $instance = null;
+	private static $instance = null;
 	private string $option_name = 'devportfolio_settings';
 
-	public static function instance(): Dashboard {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -24,7 +24,7 @@ class Dashboard {
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
 	}
 
-	public function add_menu(): void {
+	public function add_menu() {
 		add_menu_page(
 			__( 'DevPortfolio Settings', 'devportfolio' ),
 			'DevPortfolio',
@@ -36,7 +36,7 @@ class Dashboard {
 		);
 	}
 
-	public function register_settings(): void {
+	public function register_settings() {
 		register_setting( 'devportfolio_options_group', $this->option_name );
 
 		add_settings_section(
@@ -55,14 +55,14 @@ class Dashboard {
 		);
 	}
 
-	public function render_github_token(): void {
+	public function render_github_token() {
 		$options = get_option( $this->option_name );
 		$val = $options['github_token'] ?? '';
 		echo '<input type="password" name="' . esc_attr( $this->option_name ) . '[github_token]" value="' . esc_attr( $val ) . '" class="regular-text">';
 		echo '<p class="description">' . esc_html__( 'Used for fetching repository data via GitHub API.', 'devportfolio' ) . '</p>';
 	}
 
-	public function render_dashboard(): void {
+	public function render_dashboard() {
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>

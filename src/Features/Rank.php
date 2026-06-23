@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Developer Rank Calculator.
  */
 class Rank {
-	private static ?Rank $instance = null;
+	private static $instance = null;
 
-	public static function instance(): Rank {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -22,14 +22,14 @@ class Rank {
 		add_shortcode( 'dev_rank', [ $this, 'render_rank' ] );
 	}
 
-	public function calculate_rank(): int {
+	public function calculate_rank() {
         // Mock logic: Experience years + Repo count * 2
         $repos = count(\DevPortfolio\Integrations\GitHub::instance()->get_user_repos('danialchoopan'));
         $score = 50 + ($repos * 5);
 		return min( 100, $score );
 	}
 
-	public function render_rank(): string {
+	public function render_rank() {
 		$rank = $this->calculate_rank();
 		ob_start();
 		?>

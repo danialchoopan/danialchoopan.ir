@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Advanced Customizer for theme-wide settings and CSS variables.
  */
 class Customizer {
-	private static ?Customizer $instance = null;
+	private static $instance = null;
 
-	public static function instance(): Customizer {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -23,7 +23,7 @@ class Customizer {
 		add_action( 'wp_head', [ $this, 'render_css_variables' ], 1 );
 	}
 
-	public function register( $wp_customize ): void {
+	public function register( $wp_customize ) {
 		// Colors & Skins Section
 		$wp_customize->add_section( 'devportfolio_colors', [
 			'title'    => __( 'Advanced Styling & Skins', 'devportfolio' ),
@@ -59,7 +59,7 @@ class Customizer {
 		] );
 	}
 
-	public function render_css_variables(): void {
+	public function render_css_variables() {
 		$primary = get_theme_mod( 'primary_color', '#FFD700' );
         $desktop_padding = get_theme_mod( 'container_padding_desktop', '24' );
 		?>
