@@ -53,3 +53,30 @@
     @apply pointer-events-none;
   }
 }
+
+/* Dark Mode Overrides */
+.dark-mode {
+    --surface: #ffffff;
+    --white: #131313;
+}
+.dark-mode body {
+    background-color: var(--surface);
+    color: var(--white);
+}
+
+/* Typing Animation */
+.typing-animation {
+    border-right: 2px solid;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: typing 2s steps(20, end) forwards, blink 0.5s step-end infinite alternate;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+@keyframes blink {
+    50% { border-color: transparent }
+}
