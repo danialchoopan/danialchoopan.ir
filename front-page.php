@@ -15,16 +15,24 @@ foreach ($sections as $section) {
             get_template_part('template-parts/home-hero');
             break;
         case 'tech':
-            get_template_part('template-parts/home-tech');
+            if (get_theme_mod('show_tech_section', true)) {
+                get_template_part('template-parts/home-tech');
+            }
             break;
         case 'stats':
-            get_template_part('template-parts/home-stats');
+            if (get_theme_mod('show_stats_section', true)) {
+                get_template_part('template-parts/home-stats');
+            }
             break;
         case 'portfolio':
-            get_template_part('template-parts/home-portfolio');
+            if (get_theme_mod('show_portfolio_section', true)) {
+                get_template_part('template-parts/home-portfolio');
+            }
             break;
         case 'blog':
-            get_template_part('template-parts/home-blog');
+            if (get_theme_mod('show_blog_section', true)) {
+                get_template_part('template-parts/home-blog');
+            }
             break;
     }
 }

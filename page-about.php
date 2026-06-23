@@ -8,7 +8,7 @@ get_header(); ?>
     <div class="container mx-auto px-6">
         <div class="flex flex-col items-end mb-24 text-right rtl">
             <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">درباره ما</span>
-            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter italic">VIBECODE_STUDIO</h1>
+            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter italic"><?php bloginfo('name'); ?></h1>
             <p class="text-zinc-500 max-w-2xl mt-8 text-lg leading-relaxed">ما یک تیم کوچک اما قدرتمند از توسعه‌دهندگان ارشد هستیم که بر روی خلق نرم‌افزارهای با کیفیت بالا تمرکز داریم.</p>
         </div>
 
