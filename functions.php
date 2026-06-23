@@ -1,12 +1,28 @@
 <?php
 /**
- * Vibecode Studio functions and definitions
+ * Theme functions and definitions
  *
- * @package VibecodeStudio
+ * @package DevPortfolio
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
+}
+
+/**
+ * Custom Nav Walker for Header
+ */
+class DevPortfolio_Walker_Nav_Menu extends Walker_Nav_Menu {
+    function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $classes[] = 'menu-item-' . $item->ID;
+
+        $active_class = in_array('current-menu-item', $classes) ? 'text-white border-b-2 border-primary pb-1' : 'hover:text-white transition-colors';
+
+        $output .= '<a href="' . esc_url($item->url) . '" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ' . $active_class . '">';
+        $output .= $item->title;
+        $output .= '</a>';
+    }
 }
 
 /**
@@ -143,14 +159,14 @@ function devportfolio_email_render() {
 function devportfolio_github_render() {
 	$options = get_option( 'devportfolio_settings' );
 	?>
-	<input type='url' name='devportfolio_settings[github_url]' value='<?php echo esc_attr( $options['github_url'] ?? 'https://github.com/Vibecode-dev' ); ?>' class='regular-text'>
+	<input type='url' name='devportfolio_settings[github_url]' value='<?php echo esc_attr( $options['github_url'] ?? 'https://github.com/Dev' ); ?>' class='regular-text'>
 	<?php
 }
 
 function devportfolio_options_page() {
 	?>
 	<form action='options.php' method='post'>
-		<h2>Vibecode Studio Options</h2>
+		<h2>Theme Options</h2>
 		<?php
 		settings_fields( 'devportfolio_options_group' );
 		do_settings_sections( 'devportfolio_options' );
@@ -225,11 +241,12 @@ function devportfolio_reading_time( $content ) {
  * WP Customizer implementation.
  */
 function devportfolio_customize_register( $wp_customize ) {
+	// Hero Section
 	$wp_customize->add_section( 'devportfolio_hero', array( 'title' => __( 'Hero Section', 'devportfolio' ), 'priority' => 30 ) );
 	$wp_customize->add_setting( 'hero_title', array( 'default' => 'برنامه‌نویسی با حالِ تو', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'hero_title', array( 'label' => __( 'Hero Title', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
 
-	$wp_customize->add_setting( 'hero_bio', array( 'default' => 'ویب‌کد استودیو، فضایی برای خلق نرم‌افزارهای مدرن با رویکردی نوآورانه. ما ایده‌های فنی شما را به کدهای تمیز و قابل مقیاس تبدیل می‌کنیم.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
+	$wp_customize->add_setting( 'hero_bio', array( 'default' => 'فضایی برای خلق نرم‌افزارهای مدرن با رویکردی نوآورانه. ما ایده‌های فنی شما را به کدهای تمیز و قابل مقیاس تبدیل می‌کنیم.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
 	$wp_customize->add_control( 'hero_bio', array( 'label' => __( 'Hero Bio', 'devportfolio' ), 'section' => 'devportfolio_hero', 'type' => 'textarea' ) );
 
 	$wp_customize->add_setting( 'hero_cta_primary_text', array( 'default' => 'شروع پروژه', 'sanitize_callback' => 'sanitize_text_field' ) );
@@ -241,9 +258,31 @@ function devportfolio_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'hero_cta_secondary_text', array( 'default' => 'مشاهده نمونه کارها', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'hero_cta_secondary_text', array( 'label' => __( 'Secondary CTA Text', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
 
+    $wp_customize->add_setting( 'show_hero_terminal', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'show_hero_terminal', array( 'label' => __( 'Show Terminal Block', 'devportfolio' ), 'section' => 'devportfolio_hero', 'type' => 'checkbox' ) );
+
+    $wp_customize->add_setting( 'github_handle', array( 'default' => 'Dev', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'github_handle', array( 'label' => __( 'GitHub Handle', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
+
+    $wp_customize->add_setting( 'linkedin_handle', array( 'default' => 'Dev', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'linkedin_handle', array( 'label' => __( 'LinkedIn Handle', 'devportfolio' ), 'section' => 'devportfolio_hero' ) );
+
+	// Homepage Layout Section
 	$wp_customize->add_section( 'devportfolio_homepage', array( 'title' => __( 'Homepage Layout', 'devportfolio' ), 'priority' => 40 ) );
 	$wp_customize->add_setting( 'homepage_order', array( 'default' => 'hero,tech,stats,portfolio,blog', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'homepage_order', array( 'label' => __( 'Section Order', 'devportfolio' ), 'section' => 'devportfolio_homepage' ) );
+
+    $wp_customize->add_setting( 'show_tech_section', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'show_tech_section', array( 'label' => __( 'Show Tech/Expertise Section', 'devportfolio' ), 'section' => 'devportfolio_homepage', 'type' => 'checkbox' ) );
+
+    $wp_customize->add_setting( 'show_stats_section', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'show_stats_section', array( 'label' => __( 'Show Stats Section', 'devportfolio' ), 'section' => 'devportfolio_homepage', 'type' => 'checkbox' ) );
+
+    $wp_customize->add_setting( 'show_portfolio_section', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'show_portfolio_section', array( 'label' => __( 'Show Portfolio Section', 'devportfolio' ), 'section' => 'devportfolio_homepage', 'type' => 'checkbox' ) );
+
+    $wp_customize->add_setting( 'show_blog_section', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'show_blog_section', array( 'label' => __( 'Show Blog Section', 'devportfolio' ), 'section' => 'devportfolio_homepage', 'type' => 'checkbox' ) );
 }
 add_action( 'customize_register', 'devportfolio_customize_register' );
 

@@ -38,4 +38,18 @@
   .terminal-dot-red { @apply w-2.5 h-2.5 rounded-full bg-[#FF5F56]; }
   .terminal-dot-yellow { @apply w-2.5 h-2.5 rounded-full bg-[#FFBD2E]; }
   .terminal-dot-green { @apply w-2.5 h-2.5 rounded-full bg-[#27C93F]; }
+
+  /* Navigation Styles */
+  nav a {
+    @apply transition-all duration-300;
+  }
+
+  nav a:hover {
+    @apply text-primary;
+  }
+
+  /* Mobile Menu Transitions */
+  #mobile-menu.translate-x-full {
+    @apply pointer-events-none;
+  }
 }

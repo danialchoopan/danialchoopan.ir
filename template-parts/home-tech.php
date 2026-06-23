@@ -2,7 +2,7 @@
     <div class="container mx-auto px-6">
         <div class="flex flex-col items-end mb-16 text-right rtl">
             <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">خدمات ما</span>
-            <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter">پکیج‌های تخصصی وب‌کد</h2>
+            <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter">پکیج‌های تخصصی</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
