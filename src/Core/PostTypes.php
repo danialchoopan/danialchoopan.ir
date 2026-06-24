@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles Custom Post Types Registration
  */
 class PostTypes {
-	private static ?PostTypes $instance = null;
+	private static $instance = null;
 
-	public static function instance(): PostTypes {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -22,7 +22,7 @@ class PostTypes {
 		add_action( 'init', [ $this, 'register_cpts' ] );
 	}
 
-	public function register_cpts(): void {
+	public function register_cpts() {
 		// Portfolio CPT
 		register_post_type( 'portfolio', [
 			'labels'             => [

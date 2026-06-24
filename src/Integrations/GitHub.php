@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles GitHub API integration with caching.
  */
 class GitHub {
-	private static ?GitHub $instance = null;
+	private static $instance = null;
 	private string $api_url = 'https://api.github.com';
 
-	public static function instance(): GitHub {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -21,7 +21,7 @@ class GitHub {
 
 	private function __construct() {}
 
-	public function get_user_repos( string $username ): array {
+	public function get_user_repos( string $username ) {
 		$cache_key = 'github_repos_' . $username;
 		$cached = get_transient( $cache_key );
 

@@ -9,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Basic PSR-4-like autoloader for the theme.
  */
 class Autoloader {
-	public static function register(): void {
+	public static function register() {
 		spl_autoload_register( [ __CLASS__, 'autoload' ] );
 	}
 
-	public static function autoload( string $class ): void {
+	public static function autoload( string $class ) {
 		if ( strpos( $class, 'DevPortfolio\\' ) !== 0 ) {
 			return;
 		}

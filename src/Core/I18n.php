@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles Multi-language support and RTL/LTR logic.
  */
 class I18n {
-	private static ?I18n $instance = null;
+	private static $instance = null;
     private array $supported_langs = [
         'fa' => 'fa_IR',
         'en' => 'en_US',
@@ -17,7 +17,7 @@ class I18n {
         'ar' => 'ar_SA'
     ];
 
-	public static function instance(): I18n {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -52,7 +52,7 @@ class I18n {
 		return $classes;
 	}
 
-    public static function render_language_switcher(): void {
+    public static function render_language_switcher() {
         $current_lang = isset($_GET['lang']) ? $_GET['lang'] : 'fa';
         ?>
         <div class="relative group">

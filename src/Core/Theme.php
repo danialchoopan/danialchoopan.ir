@@ -9,20 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main Theme Class (Singleton)
  */
 final class Theme {
-	private static ?Theme $instance = null;
+	private static $instance = null;
 
 	private function __construct() {
 		$this->init();
 	}
 
-	public static function instance(): Theme {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
 	}
 
-	private function init(): void {
+	private function init() {
 		// Initialize Core components
 		Setup::instance();
 		Assets::instance();

@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles asset enqueuing.
  */
 class Assets {
-	private static ?Assets $instance = null;
+	private static $instance = null;
 
-	public static function instance(): Assets {
+	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
 		}
@@ -22,7 +22,7 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 	}
 
-	public function enqueue_assets(): void {
+	public function enqueue_assets() {
 		wp_enqueue_style( 'devportfolio-main', get_template_directory_uri() . '/assets/css/main.css', [], '2.0.0' );
 
         // Prism.js for code highlighting
