@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Dashboard {
 	private static $instance = null;
-	private string $option_name = 'devportfolio_settings';
+	private $option_name = 'devportfolio_settings';
 
 	public static function instance() {
 		if ( self::$instance === null ) {

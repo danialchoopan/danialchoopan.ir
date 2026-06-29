@@ -4,13 +4,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Vibecode Studio Core Initialized');
 
+    // Theme Data from PHP
+    const themeSettings = {
+        preloader: document.body.classList.contains('preloader-enabled'),
+        scrollReveal: document.body.classList.contains('scroll-reveal-enabled')
+    };
+
     // Preloader
     const preloader = document.getElementById('preloader');
-    if (preloader) {
+    if (preloader && themeSettings.preloader) {
         setTimeout(() => {
             preloader.style.opacity = '0';
             setTimeout(() => { preloader.style.display = 'none'; }, 500);
-        }, 1000);
+        }, 1500);
+    } else if (preloader) {
+        preloader.style.display = 'none';
     }
 
     // Sticky Header
@@ -55,20 +63,65 @@ document.addEventListener('DOMContentLoaded', () => {
         block.appendChild(button);
 
         button.addEventListener('click', () => {
-            const code = block.querySelector('code').innerText;
+            const code = block.querySelector('code') ? block.querySelector('code').innerText : block.innerText;
             navigator.clipboard.writeText(code).then(() => {
                 button.innerText = 'COPIED!';
                 setTimeout(() => { button.innerText = 'COPY'; }, 2000);
             });
         });
     });
-});
 
-    // Floating Mode Toggle
-    const floatingToggle = document.createElement('div');
-    floatingToggle.innerHTML = '<button class="w-12 h-12 bg-primary text-surface rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.364 17.636l-.707.707M6.364 6.364l-.707-.707m12.728 12.728l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg></button>';
-    floatingToggle.className = 'fixed bottom-8 right-8 z-[90]';
-    document.body.appendChild(floatingToggle);
-    floatingToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark-mode');
-    });
+    // AJAX Contact Form
+    const contactForm = document.getElementById('portfolio-contact-form');
+    const statusDiv = document.getElementById('contact-status');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            formData.append('action', 'submit_contact_form');
+            formData.append('security', devportfolio_ajax.nonce);
+
+            statusDiv.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
+            statusDiv.innerText = 'SENDING...';
+            statusDiv.classList.add('block', 'bg-primary', 'text-surface');
+
+            fetch(devportfolio_ajax.url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                statusDiv.innerText = data.data.message;
+                if (data.success) {
+                    statusDiv.classList.replace('bg-primary', 'bg-green-500');
+                    statusDiv.classList.replace('text-surface', 'text-white');
+                    contactForm.reset();
+                } else {
+                    statusDiv.classList.replace('bg-primary', 'bg-red-500');
+                    statusDiv.classList.replace('text-surface', 'text-white');
+                }
+            })
+            .catch(() => {
+                statusDiv.innerText = 'ERROR SENDING MESSAGE.';
+                statusDiv.classList.add('bg-red-500', 'text-white');
+            });
+        });
+    }
+
+    // Scroll Reveal
+    if (themeSettings.scrollReveal) {
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, .card, article').forEach(el => {
+            el.classList.add('scroll-reveal');
+            observer.observe(el);
+        });
+    }
+});

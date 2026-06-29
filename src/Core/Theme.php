@@ -37,6 +37,7 @@ final class Theme {
         \DevPortfolio\Features\Challenge::instance();
         \DevPortfolio\Features\Performance::instance();
         \DevPortfolio\Features\SEO::instance();
+        \DevPortfolio\Web\Ajax::instance();
 
         if ( is_admin() ) {
             \DevPortfolio\Admin\Dashboard::instance();

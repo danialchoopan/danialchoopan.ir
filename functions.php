@@ -33,3 +33,22 @@ class DevPortfolio_Walker_Nav_Menu extends Walker_Nav_Menu {
         $output .= '</a>';
     }
 }
+
+if ( ! function_exists( 'vibecode_terminal_dots' ) ) {
+    function vibecode_terminal_dots() {
+        return '
+        <div class="flex gap-1.5 mb-4">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+        </div>';
+    }
+}
+
+if ( ! function_exists( 'devportfolio_reading_time' ) ) {
+    function devportfolio_reading_time( $content ) {
+        $word_count = str_word_count( strip_tags( $content ) );
+        $reading_time = ceil( $word_count / 200 );
+        return $reading_time;
+    }
+}

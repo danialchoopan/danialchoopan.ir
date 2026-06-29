@@ -6,10 +6,6 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
     <style>
-        :root {
-            --primary-color: #FFD700;
-            --surface-color: #131313;
-        }
         .grid-pattern {
             background-image: radial-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px);
             background-size: 30px 30px;
@@ -20,12 +16,15 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php if ( get_theme_mod('enable_preloader', true) ) : ?>
 <!-- Preloader -->
-<div id="preloader" class="fixed inset-0 bg-surface z-[100] flex items-center justify-center">
-    <div class="font-mono text-primary animate-pulse">
-        <span class="typing-animation">INITIALIZING_CORE_SYSTEMS...</span>
+<div id="preloader" class="fixed inset-0 bg-surface z-[100] flex items-center justify-center transition-opacity duration-500">
+    <div class="font-mono text-primary animate-pulse text-center">
+        <div class="text-xs uppercase tracking-widest mb-2 opacity-50">Initializing...</div>
+        <span class="typing-animation">CORE_SYSTEMS_LOAD_V2.1</span>
     </div>
 </div>
+<?php endif; ?>
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border/50 transition-all duration-300" id="main-header">
 	<div class="container mx-auto px-6 h-20 flex items-center justify-between">
@@ -51,7 +50,7 @@
 		<div class="flex items-center gap-6">
             <?php \DevPortfolio\Core\I18n::render_language_switcher(); ?>
 
-            <button id="dark-mode-toggle" class="text-zinc-400 hover:text-white transition-colors">
+            <button id="dark-mode-toggle" class="text-zinc-400 hover:text-white transition-colors p-2" aria-label="Toggle Dark Mode">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
 
@@ -59,7 +58,7 @@
 				<?php echo esc_html__("HIRE_ME", "devportfolio"); ?>
 			</a>
 
-            <button id="mobile-menu-toggle" class="md:hidden text-white focus:outline-none p-2">
+            <button id="mobile-menu-toggle" class="md:hidden text-white focus:outline-none p-2" aria-label="Open Menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
 		</div>
@@ -85,4 +84,4 @@
     </div>
 </header>
 
-<main class="pt-20 min-h-screen">
+<main class="min-h-screen pt-20" id="top">
