@@ -8,37 +8,39 @@
                     <?php bloginfo( 'name' ); ?>
                 </a>
                 <p class="text-zinc-500 font-mono text-sm leading-relaxed max-w-sm">
-                    Crafting digital excellence through high-performance code and brutalist design aesthetics.
+                    <?php bloginfo('description'); ?>
                 </p>
             </div>
 
             <div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest text-white mb-6">Navigation</h4>
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-white mb-6"><?php esc_html_e('Navigation', 'devportfolio'); ?></h4>
                 <div class="flex flex-col gap-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                    <a href="#" class="hover:text-primary transition-colors">Portfolio</a>
-                    <a href="#" class="hover:text-primary transition-colors">Technical Blog</a>
-                    <a href="#" class="hover:text-primary transition-colors">Stack</a>
-                    <a href="#" class="hover:text-primary transition-colors">Connect</a>
+                    <?php
+                    if ( has_nav_menu( 'primary' ) ) {
+                        wp_nav_menu( array(
+                            'theme_location' => 'primary',
+                            'container'      => false,
+                            'items_wrap'     => '%3$s',
+                        ) );
+                    } ?>
                 </div>
             </div>
 
             <div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest text-white mb-6">Social</h4>
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-white mb-6"><?php esc_html_e('Social', 'devportfolio'); ?></h4>
                 <div class="flex flex-col gap-4 text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                    <a href="#" class="hover:text-primary transition-colors">GitHub</a>
-                    <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
-                    <a href="#" class="hover:text-primary transition-colors">Twitter</a>
+                    <a href="<?php echo esc_url(get_theme_mod('github_url', '#')); ?>" class="hover:text-primary transition-colors">GitHub</a>
                 </div>
             </div>
         </div>
 
         <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-border/30 gap-8">
 			<div class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">
-				© <?php echo date('Y'); ?> <?php bloginfo('name'); ?> // [BUILD_VERSION: 2.1.0]
+				© <?php echo date('Y'); ?> <?php bloginfo('name'); ?> // <?php echo esc_html(get_theme_mod('footer_copyright', 'ALL RIGHTS RESERVED ©')); ?>
 			</div>
 
 			<div class="flex items-center gap-8">
-				<a href="#top" class="text-[10px] font-bold uppercase tracking-widest text-primary hover:underline">Back_to_top ↑</a>
+				<a href="#top" class="text-[10px] font-bold uppercase tracking-widest text-primary hover:underline"><?php esc_html_e('Back_to_top ↑', 'devportfolio'); ?></a>
 			</div>
 		</div>
 	</div>

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class GitHub {
 	private static $instance = null;
-	private string $api_url = 'https://api.github.com';
+	private $api_url = 'https://api.github.com';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -21,7 +21,7 @@ class GitHub {
 
 	private function __construct() {}
 
-	public function get_user_repos( string $username ) {
+	public function get_user_repos( $username ) {
 		$cache_key = 'github_repos_' . $username;
 		$cached = get_transient( $cache_key );
 

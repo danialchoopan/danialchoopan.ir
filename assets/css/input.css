@@ -10,19 +10,12 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Vazirmatn';
-  src: url('../fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer base {
   body {
-    @apply font-vazir bg-surface text-white;
-    -webkit-font-smoothing: antialiased;
+    @apply bg-surface text-white antialiased;
   }
+  .rtl { direction: rtl; }
+  .ltr { direction: ltr; }
 }
 
 @layer components {
@@ -31,70 +24,52 @@
     background-size: 40px 40px;
   }
 
-  .terminal-dots {
-    @apply flex gap-1.5;
+  /* Scroll Reveal Animation */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+  }
+  .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .terminal-dot-red { @apply w-2.5 h-2.5 rounded-full bg-[#FF5F56]; }
-  .terminal-dot-yellow { @apply w-2.5 h-2.5 rounded-full bg-[#FFBD2E]; }
-  .terminal-dot-green { @apply w-2.5 h-2.5 rounded-full bg-[#27C93F]; }
-
-  /* Navigation Styles */
-  nav a {
-    @apply transition-all duration-300;
-  }
-
-  nav a:hover {
-    @apply text-primary;
-  }
-
-  /* Mobile Menu Transitions */
-  #mobile-menu.translate-x-full {
-    @apply pointer-events-none;
-  }
-}
-
-/* Dark Mode Overrides */
-.dark-mode {
-    --surface: #ffffff;
-    --white: #131313;
-}
-.dark-mode body {
-    background-color: var(--surface);
-    color: var(--white);
-}
-
-/* Typing Animation */
-.typing-animation {
+  /* Typing Animation for Preloader */
+  .typing-animation {
     border-right: 2px solid;
     width: 0;
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
-    animation: typing 2s steps(20, end) forwards, blink 0.5s step-end infinite alternate;
-}
-@keyframes typing {
+    animation: typing 2.5s steps(30, end) forwards, blink 0.5s step-end infinite alternate;
+  }
+  @keyframes typing {
     from { width: 0 }
     to { width: 100% }
-}
-@keyframes blink {
+  }
+  @keyframes blink {
     50% { border-color: transparent }
-}
+  }
 
-/* Responsiveness Fixes */
-@media (max-width: 768px) {
-    h1 { @apply text-4xl !important; }
-    .container { @apply px-4 !important; }
-    section { @apply py-12 !important; }
-}
-
-/* Scroll Animations */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
-}
-.scroll-reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+  /* Dark Mode Overrides */
+  .dark-mode {
+    --surface: #ffffff;
+    --surface-darkest: #f0f0f0;
+    --surface-high: #e0e0e0;
+    --white: #131313;
+    --zinc-500: #666666;
+    --zinc-400: #444444;
+    --border: #cccccc;
+  }
+  .dark-mode body {
+    background-color: var(--surface);
+    color: var(--white);
+  }
+  .dark-mode .bg-surface-darkest { background-color: var(--surface-darkest); }
+  .dark-mode .bg-surface-high { background-color: var(--surface-high); }
+  .dark-mode .text-white { color: var(--white) !important; }
+  .dark-mode .text-zinc-400 { color: var(--zinc-400) !important; }
+  .dark-mode .text-zinc-500 { color: var(--zinc-500) !important; }
+  .dark-mode .border-border { border-color: var(--border) !important; }
 }

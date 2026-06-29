@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class I18n {
 	private static $instance = null;
-    private array $supported_langs = [
+    private $supported_langs = [
         'fa' => 'fa_IR',
         'en' => 'en_US',
         'de' => 'de_DE',
@@ -48,7 +48,15 @@ class I18n {
             $classes[] = 'ltr';
         }
 
-        $classes[] = 'bg-surface text-white selection:bg-primary selection:text-surface font-vazir';
+        $classes[] = 'bg-surface text-white selection:bg-primary selection:text-surface';
+
+        if ( get_theme_mod('enable_preloader', true) ) {
+            $classes[] = 'preloader-enabled';
+        }
+        if ( get_theme_mod('enable_scroll_reveal', true) ) {
+            $classes[] = 'scroll-reveal-enabled';
+        }
+
 		return $classes;
 	}
 
@@ -60,10 +68,10 @@ class I18n {
                 <?php echo esc_html( strtoupper( $current_lang ) ); ?>
             </button>
             <div class="absolute right-0 mt-2 w-24 bg-surface-high border border-border shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <a href="?lang=fa" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">FA</a>
-                <a href="?lang=en" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">EN</a>
-                <a href="?lang=de" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">DE</a>
-                <a href="?lang=ar" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">AR</a>
+                <a href="<?php echo esc_url( add_query_arg( 'lang', 'fa' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">FA</a>
+                <a href="<?php echo esc_url( add_query_arg( 'lang', 'en' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">EN</a>
+                <a href="<?php echo esc_url( add_query_arg( 'lang', 'de' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">DE</a>
+                <a href="<?php echo esc_url( add_query_arg( 'lang', 'ar' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">AR</a>
             </div>
         </div>
         <?php

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Challenge {
 	private static $instance = null;
-    private array $challenges = [
+    private $challenges = [
         [ 'q' => 'Write a function to reverse a string in PHP.', 'diff' => 'Easy' ],
         [ 'q' => 'Explain the Singleton pattern and its usage.', 'diff' => 'Medium' ],
         [ 'q' => 'How does the WordPress Hook system work?', 'diff' => 'Medium' ]
