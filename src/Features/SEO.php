@@ -24,7 +24,7 @@ class SEO {
 	}
 
 	public function render_og_tags() {
-		if ( is_singleton() ) {
+		if ( is_singular() ) {
             global $post;
             echo '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '">';
             echo '<meta property="og:type" content="article">';
