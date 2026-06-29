@@ -13,7 +13,7 @@ class Autoloader {
 		spl_autoload_register( [ __CLASS__, 'autoload' ] );
 	}
 
-	public static function autoload( string $class ) {
+	public static function autoload( $class ) {
 		if ( strpos( $class, 'DevPortfolio\\' ) !== 0 ) {
 			return;
 		}
