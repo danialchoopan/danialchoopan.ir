@@ -72,3 +72,55 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingToggle.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark-mode');
     });
+
+    // AJAX Contact Form
+    const contactForm = document.getElementById('portfolio-contact-form');
+    const statusDiv = document.getElementById('contact-status');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            formData.append('action', 'submit_contact_form');
+            formData.append('security', devportfolio_ajax.nonce);
+
+            statusDiv.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
+            statusDiv.innerText = 'SENDING...';
+            statusDiv.classList.add('block', 'bg-primary', 'text-surface');
+
+            fetch(devportfolio_ajax.url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                statusDiv.innerText = data.data.message;
+                if (data.success) {
+                    statusDiv.classList.replace('bg-primary', 'bg-green-500');
+                    statusDiv.classList.replace('text-surface', 'text-white');
+                    contactForm.reset();
+                } else {
+                    statusDiv.classList.replace('bg-primary', 'bg-red-500');
+                    statusDiv.classList.replace('text-surface', 'text-white');
+                }
+            })
+            .catch(() => {
+                statusDiv.innerText = 'ERROR SENDING MESSAGE.';
+                statusDiv.classList.add('bg-red-500', 'text-white');
+            });
+        });
+    }
+
+    // Scroll Reveal
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('section, .card, article').forEach(el => {
+        el.classList.add('scroll-reveal');
+        observer.observe(el);
+    });
