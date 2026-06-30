@@ -4,17 +4,18 @@
  */
 
 get_header();
-$cols = get_theme_mod('portfolio_columns', '3');
+$cols = intval( get_theme_mod('portfolio_columns', '3') );
+if ( $cols < 1 || $cols > 4 ) $cols = 3;
 $grid_class = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{$cols} gap-8";
 ?>
 
 <div class="container mx-auto px-6 py-20">
     <header class="mb-20">
         <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter mb-4 uppercase">
-            <?php esc_html_e('Built_With_Code', 'devportfolio'); ?>
+            <?php esc_html_e('Portfolio', 'devportfolio'); ?>
         </h1>
         <p class="text-zinc-500 font-mono text-sm max-w-2xl">
-            <?php esc_html_e('// A curated collection of technical challenges, architectural solutions, and full-stack implementations.', 'devportfolio'); ?>
+            <?php esc_html_e('// A curated collection of projects, technical solutions, and full-stack implementations.', 'devportfolio'); ?>
         </p>
     </header>
 

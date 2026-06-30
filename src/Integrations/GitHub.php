@@ -1,15 +1,26 @@
 <?php
+/**
+ * GitHub.php — GitHub API integration with transient caching.
+ *
+ * Fetches public repository data for the configured GitHub user.
+ * Results are cached for 12 hours using WordPress Transients API.
+ *
+ * Requires a Personal Access Token for higher API rate limits (optional).
+ *
+ * @package DanialPortfolio
+ * @subpackage Integrations
+ */
+
 namespace DevPortfolio\Integrations;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
-/**
- * Handles GitHub API integration with caching.
- */
 class GitHub {
 	private static $instance = null;
+
+	/** GitHub API base URL. */
 	private $api_url = 'https://api.github.com';
 
 	public static function instance() {
@@ -21,29 +32,50 @@ class GitHub {
 
 	private function __construct() {}
 
+	/**
+	 * Fetch public repositories for a GitHub user.
+	 *
+	 * Results are cached for 12 hours using transients.
+	 * If a Personal Access Token is configured, it's used
+	 * to avoid rate limiting.
+	 *
+	 * @param  string $username GitHub username to fetch repos for.
+	 * @return array  Array of repository data (or empty array on error).
+	 */
 	public function get_user_repos( $username ) {
-		$cache_key = 'github_repos_' . $username;
-		$cached = get_transient( $cache_key );
+		$cache_key = 'github_repos_' . sanitize_key( $username );
+		$cached    = get_transient( $cache_key );
 
-		if ( $cached !== false ) {
+		// Return cached data if available
+		if ( false !== $cached ) {
 			return $cached;
 		}
 
+		// Get GitHub token from theme settings
 		$options = get_option( 'devportfolio_settings' );
-		$token = $options['github_token'] ?? '';
+		$token   = $options['github_token'] ?? '';
 
+		// Build request headers
 		$args = [
 			'headers' => [
-				'User-Agent' => 'DevPortfolio-Theme',
-			]
+				'User-Agent' => 'DanialPortfolio-Theme',
+				'Accept'     => 'application/vnd.github.v3+json',
+			],
+			'timeout' => 15,
 		];
 
+		// Add authorization header if token is set
 		if ( ! empty( $token ) ) {
 			$args['headers']['Authorization'] = 'token ' . $token;
 		}
 
-		$response = wp_remote_get( $this->api_url . "/users/{$username}/repos?sort=updated&per_page=6", $args );
+		// Fetch from GitHub API (sorted by most recently updated, max 6)
+		$response = wp_remote_get(
+			$this->api_url . '/users/' . rawurlencode( $username ) . '/repos?sort=updated&per_page=6',
+			$args
+		);
 
+		// Handle request errors
 		if ( is_wp_error( $response ) ) {
 			return [];
 		}
@@ -55,6 +87,7 @@ class GitHub {
 			return [];
 		}
 
+		// Cache for 12 hours
 		set_transient( $cache_key, $repos, HOUR_IN_SECONDS * 12 );
 
 		return $repos;

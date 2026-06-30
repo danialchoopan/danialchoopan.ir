@@ -32,7 +32,7 @@ get_header(); ?>
         <div class="lg:col-span-8">
             <div class="prose prose-invert prose-primary max-w-none">
                 <div class="p-8 border border-border bg-surface-container relative mb-12">
-                    <?php echo vibecode_terminal_dots(); ?>
+                    <?php echo danial_terminal_dots(); ?>
                     <h2 class="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-6">// PROJECT_CONTEXT</h2>
                     <?php the_content(); ?>
                 </div>
@@ -56,7 +56,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <?php echo do_shortcode('[dev_rank]'); ?>
+			<?php echo wp_kses_post( do_shortcode( '[dev_rank]' ) ); ?>
         </aside>
     </div>
 </article>

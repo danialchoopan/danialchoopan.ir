@@ -1,21 +1,19 @@
 <?php
+/**
+ * I18n.php — Farsi-only locale + RTL support.
+ *
+ * @package DanialPortfolio
+ * @subpackage Core
+ */
+
 namespace DevPortfolio\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
-/**
- * Handles Multi-language support and RTL/LTR logic.
- */
 class I18n {
 	private static $instance = null;
-    private $supported_langs = [
-        'fa' => 'fa_IR',
-        'en' => 'en_US',
-        'de' => 'de_DE',
-        'ar' => 'ar_SA'
-    ];
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -29,51 +27,32 @@ class I18n {
 		add_filter( 'body_class', [ $this, 'add_body_classes' ] );
 	}
 
+	/**
+	 * Force Farsi locale. Check for ?lang=en override for preview.
+	 */
 	public function handle_locale( $locale ) {
-        if ( isset( $_GET['lang'] ) && array_key_exists( $_GET['lang'], $this->supported_langs ) ) {
-            return $this->supported_langs[ $_GET['lang'] ];
-        }
-
-        $options = get_option( 'devportfolio_settings' );
-        $default_lang = $options['site_language'] ?? 'fa';
-
-        return $this->supported_langs[ $default_lang ] ?? $locale;
+		if ( isset( $_GET['lang'] ) && sanitize_text_field( wp_unslash( $_GET['lang'] ) ) === 'en' ) {
+			return 'en_US';
+		}
+		return 'fa_IR';
 	}
 
+	/**
+	 * Add body classes: RTL, feature flags.
+	 */
 	public function add_body_classes( $classes ) {
-        $locale = get_locale();
-        if ( in_array( $locale, [ 'fa_IR', 'ar_SA' ] ) ) {
-            $classes[] = 'rtl';
-        } else {
-            $classes[] = 'ltr';
-        }
+		$locale = get_locale();
+		$classes[] = ( $locale === 'fa_IR' ) ? 'rtl' : 'ltr';
 
-        $classes[] = 'bg-surface text-white selection:bg-primary selection:text-surface';
+		$classes[] = 'bg-surface text-white selection:bg-primary selection:text-surface';
 
-        if ( get_theme_mod('enable_preloader', true) ) {
-            $classes[] = 'preloader-enabled';
-        }
-        if ( get_theme_mod('enable_scroll_reveal', true) ) {
-            $classes[] = 'scroll-reveal-enabled';
-        }
+		if ( get_theme_mod( 'enable_preloader', true ) ) {
+			$classes[] = 'preloader-enabled';
+		}
+		if ( get_theme_mod( 'enable_scroll_reveal', true ) ) {
+			$classes[] = 'scroll-reveal-enabled';
+		}
 
 		return $classes;
 	}
-
-    public static function render_language_switcher() {
-        $current_lang = isset($_GET['lang']) ? $_GET['lang'] : 'fa';
-        ?>
-        <div class="relative group">
-            <button class="text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
-                <?php echo esc_html( strtoupper( $current_lang ) ); ?>
-            </button>
-            <div class="absolute right-0 mt-2 w-24 bg-surface-high border border-border shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <a href="<?php echo esc_url( add_query_arg( 'lang', 'fa' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">FA</a>
-                <a href="<?php echo esc_url( add_query_arg( 'lang', 'en' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">EN</a>
-                <a href="<?php echo esc_url( add_query_arg( 'lang', 'de' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">DE</a>
-                <a href="<?php echo esc_url( add_query_arg( 'lang', 'ar' ) ); ?>" class="block px-4 py-2 text-[10px] hover:bg-primary hover:text-surface transition-colors">AR</a>
-            </div>
-        </div>
-        <?php
-    }
 }

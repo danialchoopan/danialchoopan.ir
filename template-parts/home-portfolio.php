@@ -1,20 +1,28 @@
 <section class="py-24 bg-surface">
     <div class="container mx-auto px-6">
+        <?php
+        $portfolio_subtitle    = get_theme_mod( 'portfolio_subtitle', 'گزیده آثار' );
+        $portfolio_title       = get_theme_mod( 'portfolio_title', 'پروژه‌های اخیر' );
+        $portfolio_view_all    = get_theme_mod( 'portfolio_view_all_text', 'مشاهده همه' );
+        $portfolio_view_all_url = get_theme_mod( 'portfolio_view_all_url', '' );
+        ?>
         <div class="flex justify-between items-end mb-16 rtl">
             <div class="text-right">
-                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4 block">گزیده آثار</span>
-                <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter">پروژه‌های اخیر</h2>
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4 block"><?php echo esc_html( $portfolio_subtitle ); ?></span>
+                <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter"><?php echo esc_html( $portfolio_title ); ?></h2>
             </div>
-            <a href="#" class="hidden md:block px-6 py-3 border border-border text-white text-[10px] font-black uppercase tracking-widest hover:bg-surface-high transition-colors">
-                مشاهده همه
+            <?php if ( $portfolio_view_all_url ) : ?>
+            <a href="<?php echo esc_url( $portfolio_view_all_url ); ?>" class="hidden md:block px-6 py-3 border border-border text-white text-[10px] font-black uppercase tracking-widest hover:bg-surface-high transition-colors">
+                <?php echo esc_html( $portfolio_view_all ); ?>
             </a>
+            <?php endif; ?>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
             $args = array(
                 'post_type' => 'portfolio',
-                'posts_per_page' => 3,
+                'posts_per_page' => (int) get_theme_mod( 'portfolio_items_count', 3 ),
             );
             $query = new WP_Query($args);
 
@@ -43,7 +51,7 @@
                             </h3>
 
                             <p class="text-zinc-400 text-xs mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                <?php echo get_the_excerpt(); ?>
+                                <?php echo esc_html( get_the_excerpt() ); ?>
                             </p>
 
                             <a href="<?php the_permalink(); ?>" class="inline-flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest group/link">

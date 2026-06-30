@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./*.php", "./template-parts/*.php", "./page-*.php"],
+  content: ["./*.php", "./template-parts/*.php", "./src/**/*.php"],
   darkMode: 'class',
   theme: {
     extend: {
@@ -24,17 +24,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        sora: ['Sora', 'sans-serif'],
-        ibm: ['IBM Plex Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
         vazir: ['Vazirmatn', 'sans-serif'],
-      },
-      borderRadius: {
-        'sm': '0.125rem',
-        'DEFAULT': '0.25rem',
-        'md': '0.375rem',
-        'lg': '0.5rem',
-        'xl': '0.75rem',
+        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },

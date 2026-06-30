@@ -29,8 +29,8 @@
                         $categories = get_categories();
                         foreach($categories as $cat) : ?>
                             <li class="flex justify-between items-center text-xs font-bold uppercase tracking-widest group">
-                                <span class="text-zinc-500">(<?php echo $cat->count; ?>)</span>
-                                <a href="<?php echo get_category_link($cat->term_id); ?>" class="text-zinc-400 group-hover:text-white transition-colors"><?php echo $cat->name; ?></a>
+                                <span class="text-zinc-500">(<?php echo esc_html( $cat->count ); ?>)</span>
+                                <a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="text-zinc-400 group-hover:text-white transition-colors"><?php echo esc_html( $cat->name ); ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -60,7 +60,7 @@
                             </h2>
 
                             <p class="text-zinc-500 text-sm mb-8 leading-relaxed line-clamp-2">
-                                <?php echo get_the_excerpt(); ?>
+                                <?php echo esc_html( get_the_excerpt() ); ?>
                             </p>
 
                             <div class="flex items-center justify-between">
