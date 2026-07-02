@@ -323,12 +323,12 @@ class Customizer {
 		] );
 
 		$wp_customize->add_setting( 'homepage_order', [
-			'default'           => 'hero,tech,stats,portfolio,blog',
+			'default'           => 'hero,skills,tech,stats,portfolio,blog',
 			'sanitize_callback' => 'sanitize_text_field',
 		] );
 		$wp_customize->add_control( 'homepage_order', [
 			'label'       => __( 'Section Order (comma-separated)', 'devportfolio' ),
-			'description' => __( 'Available: hero, tech, stats, portfolio, testimonials, cta, blog', 'devportfolio' ),
+			'description' => __( 'Available: hero, skills, tech, stats, portfolio, testimonials, cta, blog', 'devportfolio' ),
 			'section'     => 'danial_homepage',
 			'type'        => 'text',
 		] );
@@ -339,6 +339,16 @@ class Customizer {
 		] );
 		$wp_customize->add_control( 'show_tech_section', [
 			'label'   => __( 'Show Tech/Services Section', 'devportfolio' ),
+			'section' => 'danial_homepage',
+			'type'    => 'checkbox',
+		] );
+
+		$wp_customize->add_setting( 'show_skills_section', [
+			'default'           => true,
+			'sanitize_callback' => 'wp_validate_boolean',
+		] );
+		$wp_customize->add_control( 'show_skills_section', [
+			'label'   => __( 'Show Skills Section', 'devportfolio' ),
 			'section' => 'danial_homepage',
 			'type'    => 'checkbox',
 		] );
@@ -1174,6 +1184,87 @@ class Customizer {
 				'section' => 'danial_terminal',
 				'type'    => 'text',
 			] );
+		}
+
+		// ── Skills Section ────────────────────────────────────────────
+		$wp_customize->add_section( 'danial_skills', [
+			'title'    => __( 'Skills Section', 'devportfolio' ),
+			'priority' => 38,
+		] );
+
+		$wp_customize->add_setting( 'skills_subtitle', [
+			'default'           => 'مهارت‌های فنی',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'skills_subtitle', [
+			'label'   => __( 'Skills Subtitle', 'devportfolio' ),
+			'section' => 'danial_skills',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'skills_title', [
+			'default'           => 'تکنولوژی‌ها و ابزارها',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'skills_title', [
+			'label'   => __( 'Skills Title', 'devportfolio' ),
+			'section' => 'danial_skills',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'skills_terminal_title', [
+			'default'           => 'skills.sh — ~/danial',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'skills_terminal_title', [
+			'label'   => __( 'Terminal Window Title', 'devportfolio' ),
+			'section' => 'danial_skills',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'skills_columns', [
+			'default'           => '2',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'skills_columns', [
+			'label'   => __( 'Columns (1 or 2)', 'devportfolio' ),
+			'section' => 'danial_skills',
+			'type'    => 'select',
+			'choices' => [
+				'1' => '1 Column',
+				'2' => '2 Columns',
+			],
+		] );
+
+		for ( $i = 1; $i <= 12; $i++ ) {
+			$wp_customize->add_setting( "skill_{$i}_name", [
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+			] );
+			$wp_customize->add_control( "skill_{$i}_name", [
+				'label' => sprintf( __( 'Skill %d Name', 'devportfolio' ), $i ),
+				'section' => 'danial_skills',
+				'type'    => 'text',
+			] );
+
+			$wp_customize->add_setting( "skill_{$i}_level", [
+				'default'           => '80',
+				'sanitize_callback' => 'absint',
+			] );
+			$wp_customize->add_control( "skill_{$i}_level", [
+				'label' => sprintf( __( 'Skill %d Level (0-100)', 'devportfolio' ), $i ),
+				'section' => 'danial_skills',
+				'type'    => 'number',
+			] );
+
+			$wp_customize->add_setting( "skill_{$i}_color", [
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_hex_color',
+			] );
+			$wp_customize->add_control( new \WP_Customize_Color_Control( $wp_customize, "skill_{$i}_color", [
+				'label' => sprintf( __( 'Skill %d Color (empty = primary)', 'devportfolio' ), $i ),
+				'section' => 'danial_skills',
+			] ) );
 		}
 
 		// ── Footer Advanced ─────────────────────────────────────────

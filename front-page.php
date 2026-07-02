@@ -1,11 +1,6 @@
 <?php
 /**
- * Front Page Template — Renders the homepage with configurable sections.
- *
- * Section order is controlled via Customizer → Homepage Sections.
- * Each section can be individually toggled on/off.
- *
- * Available sections: hero, tech, stats, portfolio, cta, blog
+ * Available sections: hero, skills, tech, stats, portfolio, cta, blog
  *
  * @package DanialPortfolio
  */
@@ -13,13 +8,19 @@
 get_header();
 
 // Read section order from Customizer (comma-separated string)
-$order    = get_theme_mod( 'homepage_order', 'hero,tech,stats,portfolio,cta,blog' );
+$order    = get_theme_mod( 'homepage_order', 'hero,skills,tech,stats,portfolio,cta,blog' );
 $sections = array_map( 'trim', explode( ',', $order ) );
 
 foreach ( $sections as $section ) {
 	switch ( $section ) {
 		case 'hero':
 			get_template_part( 'template-parts/home-hero' );
+			break;
+
+		case 'skills':
+			if ( get_theme_mod( 'show_skills_section', true ) ) {
+				get_template_part( 'template-parts/home-skills' );
+			}
 			break;
 
 		case 'tech':

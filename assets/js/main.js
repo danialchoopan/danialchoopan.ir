@@ -149,6 +149,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ══════════════════════════════════════════════════════════════════
+    // SKILLS BARS ANIMATION (terminal-style)
+    // ══════════════════════════════════════════════════════════════════
+    const skillBars = document.querySelectorAll('.skill-bar');
+    if (skillBars.length) {
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const targetWidth = bar.getAttribute('data-width');
+                    // Animate the bar width
+                    setTimeout(() => {
+                        bar.style.width = targetWidth + '%';
+                    }, 300);
+                    // Animate the percentage text
+                    const levelText = bar.closest('.skill-item')?.querySelector('.skill-level-text');
+                    if (levelText) {
+                        const target = parseInt(targetWidth, 10);
+                        let current = 0;
+                        const step = Math.max(1, Math.floor(target / 40));
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            levelText.textContent = current + '%';
+                        }, 25);
+                    }
+                    // Show the glow line
+                    const glow = bar.parentElement.querySelector('.skill-glow');
+                    if (glow) {
+                        setTimeout(() => {
+                            glow.style.opacity = '1';
+                            glow.style.left = targetWidth + '%';
+                            glow.style.transition = 'opacity 0.5s ease';
+                        }, 1500);
+                    }
+                    skillObserver.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.2 });
+        skillBars.forEach(bar => skillObserver.observe(bar));
+    }
+
+    // ══════════════════════════════════════════════════════════════════
     // STICKY HEADER
     // ══════════════════════════════════════════════════════════════════
     let lastScroll = 0;
