@@ -7,9 +7,9 @@ get_header(); ?>
 <section class="py-24 bg-surface min-h-screen grid-pattern">
     <div class="container mx-auto px-6">
         <div class="flex flex-col items-end mb-24 text-right rtl">
-            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">درباره ما</span>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4"><?php echo esc_html( get_theme_mod( 'about_subtitle', 'درباره ما' ) ); ?></span>
             <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter italic"><?php bloginfo('name'); ?></h1>
-            <p class="text-zinc-500 max-w-2xl mt-8 text-lg leading-relaxed">من یک توسعه‌دهنده ارشد هستم که بر روی خلق نرم‌افزارهای با کیفیت بالا و تجربه کاربری عالی تمرکز دارم.</p>
+            <p class="text-zinc-500 max-w-2xl mt-8 text-lg leading-relaxed"><?php echo esc_html( get_theme_mod( 'about_description', 'من یک توسعه‌دهنده ارشد هستم که بر روی خلق نرم‌افزارهای با کیفیت بالا و تجربه کاربری عالی تمرکز دارم.' ) ); ?></p>
         </div>
 
         <div class="max-w-4xl ml-auto text-right rtl prose prose-invert prose-zinc prose-lg

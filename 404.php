@@ -58,10 +58,10 @@ $not_found_message = get_theme_mod( '404_message', 'صفحه مورد نظر ی�
         <!-- Actions -->
         <div class="flex flex-wrap justify-center gap-4">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="px-8 py-4 bg-primary text-surface text-[12px] font-black uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity">
-                <?php esc_html_e( 'Back to Home', 'devportfolio' ); ?>
+                <?php echo esc_html( get_theme_mod( '404_home_button', 'بازگشت به صفحه اصلی' ) ); ?>
             </a>
             <button onclick="history.back()" class="px-8 py-4 border border-border text-white text-[12px] font-black uppercase tracking-widest rounded-sm hover:bg-surface-high transition-colors">
-                <?php esc_html_e( 'Go Back', 'devportfolio' ); ?>
+                <?php echo esc_html( get_theme_mod( '404_back_button', 'بازگشت' ) ); ?>
             </button>
         </div>
     </div>

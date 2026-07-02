@@ -30,7 +30,7 @@
 
                         <div class="p-8 text-right rtl">
                             <div class="flex justify-between items-center mb-6">
-                                <span class="px-2 py-1 bg-primary text-surface text-[8px] font-bold uppercase tracking-widest">FEATURED_POST</span>
+                                <span class="px-2 py-1 bg-primary text-surface text-[8px] font-bold uppercase tracking-widest"><?php echo esc_html( get_theme_mod( 'blog_featured_label', 'نوشته ویژه' ) ); ?></span>
                                 <time class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest"><?php echo get_the_date('', $featured->ID); ?></time>
                             </div>
 
@@ -45,7 +45,7 @@
                             </p>
 
                             <a href="<?php echo esc_url( get_permalink( $featured->ID ) ); ?>" class="inline-flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest group/link">
-                                مطالعه ادامه مطلب
+                                <?php echo esc_html( get_theme_mod( 'blog_read_more_link', 'مطالعه ادامه مطلب' ) ); ?>
                                 <svg class="w-4 h-4 text-primary group-hover/link:translate-x-[-4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                             </a>
                         </div>
@@ -76,7 +76,7 @@
                                 </h4>
                                 <div class="flex items-center gap-2 text-[8px] text-zinc-500 font-bold uppercase tracking-widest">
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <?php echo devportfolio_reading_time($post->post_content); ?> دقیقه مطالعه
+                                    <?php echo devportfolio_reading_time($post->post_content); ?> <?php echo esc_html( get_theme_mod( 'blog_minutes_reading', 'دقیقه مطالعه' ) ); ?>
                                 </div>
                             </div>
                         </article>

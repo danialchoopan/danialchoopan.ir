@@ -195,6 +195,7 @@ ul, ol { list-style: none; }
 .bg-\[#FF5F56\] { background-color: #FF5F56; }
 .bg-\[#FFBD2E\] { background-color: #FFBD2E; }
 .bg-\[#27C93F\] { background-color: #27C93F; }
+.bg-\[#25D366\] { background-color: #25D366; }
 
 /* ── Border ────────────────────────────────────────────────────── */
 .border { border-width: 1px; border-style: solid; }
@@ -231,7 +232,15 @@ ul, ol { list-style: none; }
 .opacity-0 { opacity: 0; } .opacity-10 { opacity: 0.1; } .opacity-20 { opacity: 0.2; }
 .opacity-30 { opacity: 0.3; } .opacity-50 { opacity: 0.5; } .opacity-90 { opacity: 0.9; } .opacity-100 { opacity: 1; }
 
+/* ── Gradients ────────────────────────────────────────────────── */
+.bg-gradient-to-t { background-image: linear-gradient(to top, var(--tw-gradient-stops)); }
+.bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+.from-surface { --tw-gradient-from: var(--c-surface); }
+.via-surface\/20 { --tw-gradient-via: color-mix(in srgb, var(--c-surface) 20%, transparent); }
+.to-transparent { --tw-gradient-to: transparent; }
+
 /* ── Shadows ───────────────────────────────────────────────────── */
+.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); }
 .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); }
 .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
 

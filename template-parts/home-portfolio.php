@@ -55,7 +55,7 @@
                             </p>
 
                             <a href="<?php the_permalink(); ?>" class="inline-flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest group/link">
-                                مشاهده جزئیات
+                                <?php echo esc_html( get_theme_mod( 'portfolio_view_details', 'مشاهده جزئیات' ) ); ?>
                                 <svg class="w-4 h-4 text-primary group-hover/link:translate-x-[-4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                             </a>
                         </div>
@@ -67,8 +67,8 @@
                 <?php for($i=1; $i<=3; $i++): ?>
                     <div class="aspect-[4/5] bg-surface-high border border-border p-8 flex flex-col justify-end text-right rtl opacity-50">
                         <div class="w-12 h-1 bg-primary mb-4"></div>
-                        <h3 class="text-2xl font-black text-white mb-2">پروژه نمونه شماره <?php echo $i; ?></h3>
-                        <p class="text-zinc-500 text-xs">در حال آماده‌سازی برای نمایش...</p>
+                        <h3 class="text-2xl font-black text-white mb-2"><?php echo esc_html( get_theme_mod( 'portfolio_sample_prefix', 'پروژه نمونه شماره' ) ); ?> <?php echo $i; ?></h3>
+                        <p class="text-zinc-500 text-xs"><?php echo esc_html( get_theme_mod( 'portfolio_coming_soon', 'در حال آماده‌سازی برای نمایش...' ) ); ?></p>
                     </div>
                 <?php endfor; ?>
             <?php endif; ?>

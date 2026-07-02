@@ -3,8 +3,8 @@
 <section class="py-24 bg-surface min-h-screen grid-pattern">
     <div class="container mx-auto px-6">
         <div class="flex flex-col items-end mb-16 text-right rtl">
-            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">آرشیو مطالب</span>
-            <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter">وبلاگ فنی</h1>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4"><?php echo esc_html( get_theme_mod( 'blog_archive_subtitle', 'آرشیو مطالب' ) ); ?></span>
+            <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter"><?php echo esc_html( get_theme_mod( 'blog_archive_title', 'وبلاگ فنی' ) ); ?></h1>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -12,9 +12,9 @@
             <aside class="lg:col-span-4 order-2 lg:order-1 space-y-12">
                 <!-- Search -->
                 <div class="bg-surface-darkest border border-border p-8 text-right rtl">
-                    <h3 class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-6">SEARCH_DATABASE</h3>
+                    <h3 class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-6"><?php echo esc_html( get_theme_mod( 'blog_search_label', 'جستجو' ) ); ?></h3>
                     <form action="<?php echo home_url('/'); ?>" method="get" class="relative">
-                        <input type="text" name="s" placeholder="جستجو در مطالب..." class="w-full bg-surface border border-border px-4 py-3 text-sm text-white focus:border-primary outline-none transition-colors rtl">
+                        <input type="text" name="s" placeholder="<?php echo esc_attr( get_theme_mod( 'blog_search_placeholder', 'جستجو در مطالب...' ) ); ?>" class="w-full bg-surface border border-border px-4 py-3 text-sm text-white focus:border-primary outline-none transition-colors rtl">
                         <button type="submit" class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-primary">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         </button>
@@ -23,7 +23,7 @@
 
                 <!-- Categories -->
                 <div class="bg-surface-darkest border border-border p-8 text-right rtl">
-                    <h3 class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-6">CATEGORIES</h3>
+                    <h3 class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-6"><?php echo esc_html( get_theme_mod( 'blog_categories_label', 'دسته‌بندی‌ها' ) ); ?></h3>
                     <ul class="space-y-4">
                         <?php
                         $categories = get_categories();
@@ -66,9 +66,9 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <?php echo devportfolio_reading_time(get_the_content()); ?> دقیقه مطالعه
+                                    <?php echo devportfolio_reading_time(get_the_content()); ?> <?php echo esc_html( get_theme_mod( 'blog_reading_time_label', 'دقیقه مطالعه' ) ); ?>
                                 </div>
-                                <a href="<?php the_permalink(); ?>" class="text-[10px] font-black text-white uppercase tracking-widest hover:text-primary transition-colors">مطالعه کامل</a>
+                                <a href="<?php the_permalink(); ?>" class="text-[10px] font-black text-white uppercase tracking-widest hover:text-primary transition-colors"><?php echo esc_html( get_theme_mod( 'blog_read_more_text', 'مطالعه کامل' ) ); ?></a>
                             </div>
                         </div>
                     </article>

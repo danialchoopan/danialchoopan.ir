@@ -27,7 +27,7 @@ get_header(); ?>
             </h1>
 
             <div class="flex items-center justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                <span><?php echo sprintf( esc_html__( '%d MIN_READ', 'devportfolio' ), devportfolio_reading_time( get_the_content() ) ); ?></span>
+                <span><?php echo sprintf( esc_html__( '%1$s %2$s', 'devportfolio' ), devportfolio_reading_time( get_the_content() ), esc_html( get_theme_mod( 'single_reading_time_label', 'MIN_READ' ) ) ); ?></span>
                 <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
                 <span><?php echo esc_html( get_the_author() ); ?></span>
             </div>
@@ -46,8 +46,8 @@ get_header(); ?>
 
             <footer class="mt-20 pt-12 border-t border-border/50">
                 <?php the_post_navigation([
-                    'prev_text' => '<span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-2">PREVIOUS_LOG</span> <span class="text-white font-bold">%title</span>',
-                    'next_text' => '<span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-2">NEXT_LOG</span> <span class="text-white font-bold">%title</span>',
+                    'prev_text' => '<span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-2">' . esc_html( get_theme_mod( 'single_prev_text', 'PREVIOUS_LOG' ) ) . '</span> <span class="text-white font-bold">%title</span>',
+                    'next_text' => '<span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-2">' . esc_html( get_theme_mod( 'single_next_text', 'NEXT_LOG' ) ) . '</span> <span class="text-white font-bold">%title</span>',
                 ]); ?>
             </footer>
 

@@ -33,7 +33,7 @@ get_header(); ?>
             <div class="prose prose-invert prose-primary max-w-none">
                 <div class="p-8 border border-border bg-surface-container relative mb-12">
                     <?php echo danial_terminal_dots(); ?>
-                    <h2 class="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-6">// PROJECT_CONTEXT</h2>
+                    <h2 class="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-6"><?php echo esc_html( get_theme_mod( 'portfolio_context_label', '// PROJECT_CONTEXT' ) ); ?></h2>
                     <?php the_content(); ?>
                 </div>
             </div>
@@ -41,7 +41,7 @@ get_header(); ?>
 
         <aside class="lg:col-span-4 space-y-8">
             <div class="p-8 border border-border bg-surface-high rounded-sm">
-                <h3 class="text-xs font-black uppercase tracking-widest text-zinc-500 mb-6">Stack</h3>
+                <h3 class="text-xs font-black uppercase tracking-widest text-zinc-500 mb-6"><?php echo esc_html( get_theme_mod( 'portfolio_stack_label', 'Stack' ) ); ?></h3>
                 <div class="flex flex-wrap gap-2">
                     <?php
                     $stack = get_post_meta( get_the_ID(), '_portfolio_stack', true );

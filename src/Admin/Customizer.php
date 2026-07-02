@@ -661,6 +661,26 @@ class Customizer {
 			'type'    => 'text',
 		] );
 
+		$wp_customize->add_setting( '404_home_button', [
+			'default'           => 'بازگشت به صفحه اصلی',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( '404_home_button', [
+			'label'   => __( 'Back to Home Button', 'devportfolio' ),
+			'section' => 'danial_404',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( '404_back_button', [
+			'default'           => 'بازگشت',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( '404_back_button', [
+			'label'   => __( 'Go Back Button', 'devportfolio' ),
+			'section' => 'danial_404',
+			'type'    => 'text',
+		] );
+
 		// ── Blog Section ──────────────────────────────────────────────
 		$wp_customize->add_section( 'danial_blog', [
 			'title'    => __( 'Blog Section', 'devportfolio' ),
@@ -695,6 +715,144 @@ class Customizer {
 			'label'   => __( 'Posts per Page', 'devportfolio' ),
 			'section' => 'danial_blog',
 			'type'    => 'number',
+		] );
+
+		// ── Blog Archive Page ──────────────────────────────────────────
+		$wp_customize->add_section( 'danial_blog_archive', [
+			'title'    => __( 'Blog Archive Page', 'devportfolio' ),
+			'priority' => 59,
+		] );
+
+		$wp_customize->add_setting( 'blog_archive_title', [
+			'default'           => 'وبلاگ فنی',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_archive_title', [
+			'label'   => __( 'Archive Page Title', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_archive_subtitle', [
+			'default'           => 'آرشیو مطالب',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_archive_subtitle', [
+			'label'   => __( 'Archive Page Subtitle', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_search_placeholder', [
+			'default'           => 'جستجو در مطالب...',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_search_placeholder', [
+			'label'   => __( 'Search Placeholder', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_categories_label', [
+			'default'           => 'دسته‌بندی‌ها',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_categories_label', [
+			'label'   => __( 'Categories Label', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_search_label', [
+			'default'           => 'جستجو',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_search_label', [
+			'label'   => __( 'Search Button Label', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_read_more_text', [
+			'default'           => 'مطالعه کامل',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_read_more_text', [
+			'label'   => __( 'Read More Text', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_reading_time_label', [
+			'default'           => 'دقیقه مطالعه',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_reading_time_label', [
+			'label'   => __( 'Reading Time Label', 'devportfolio' ),
+			'section' => 'danial_blog_archive',
+			'type'    => 'text',
+		] );
+
+		// ── Single Post Settings ──────────────────────────────────────
+		$wp_customize->add_section( 'danial_single_post', [
+			'title'    => __( 'Single Post', 'devportfolio' ),
+			'priority' => 59,
+		] );
+
+		$wp_customize->add_setting( 'single_reading_time_label', [
+			'default'           => 'MIN_READ',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'single_reading_time_label', [
+			'label'   => __( 'Reading Time Label (e.g. MIN_READ)', 'devportfolio' ),
+			'section' => 'danial_single_post',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'single_prev_text', [
+			'default'           => 'PREVIOUS_LOG',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'single_prev_text', [
+			'label'   => __( 'Previous Post Label', 'devportfolio' ),
+			'section' => 'danial_single_post',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'single_next_text', [
+			'default'           => 'NEXT_LOG',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'single_next_text', [
+			'label'   => __( 'Next Post Label', 'devportfolio' ),
+			'section' => 'danial_single_post',
+			'type'    => 'text',
+		] );
+
+		// ── Single Portfolio Settings ─────────────────────────────────
+		$wp_customize->add_section( 'danial_single_portfolio', [
+			'title'    => __( 'Single Portfolio', 'devportfolio' ),
+			'priority' => 60,
+		] );
+
+		$wp_customize->add_setting( 'portfolio_context_label', [
+			'default'           => '// PROJECT_CONTEXT',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'portfolio_context_label', [
+			'label'   => __( 'Project Context Label', 'devportfolio' ),
+			'section' => 'danial_single_portfolio',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'portfolio_stack_label', [
+			'default'           => 'Stack',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'portfolio_stack_label', [
+			'label'   => __( 'Stack Section Label', 'devportfolio' ),
+			'section' => 'danial_single_portfolio',
+			'type'    => 'text',
 		] );
 
 		// ── Header Section ─────────────────────────────────────────────
@@ -1170,6 +1328,26 @@ class Customizer {
 			'type'    => 'text',
 		] );
 
+		$wp_customize->add_setting( 'contact_page_description', [
+			'default'           => 'پروژه‌ای در ذهن دارید؟ یا فقط می‌خواهید سلام کنید؟ من همیشه آماده بحث در مورد تکنولوژی‌های جدید و همکاری‌های هیجان‌انگیز هستم.',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		] );
+		$wp_customize->add_control( 'contact_page_description', [
+			'label'   => __( 'Contact Page Description', 'devportfolio' ),
+			'section' => 'danial_contact',
+			'type'    => 'textarea',
+		] );
+
+		$wp_customize->add_setting( 'contact_social_title', [
+			'default'           => 'شبکه‌های اجتماعی',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'contact_social_title', [
+			'label'   => __( 'Social Media Title', 'devportfolio' ),
+			'section' => 'danial_contact',
+			'type'    => 'text',
+		] );
+
 		// ── About Page Settings ─────────────────────────────────────
 		$wp_customize->add_section( 'danial_about', [
 			'title'    => __( 'About Page', 'devportfolio' ),
@@ -1468,6 +1646,78 @@ class Customizer {
 			'label'   => __( 'Show Categories', 'devportfolio' ),
 			'section' => 'danial_blog_adv',
 			'type'    => 'checkbox',
+		] );
+
+		// ── Home Blog Section Text ───────────────────────────────────
+		$wp_customize->add_section( 'danial_home_blog_text', [
+			'title'    => __( 'Blog Section Text', 'devportfolio' ),
+			'priority' => 73,
+		] );
+
+		$wp_customize->add_setting( 'blog_featured_label', [
+			'default'           => 'نوشته ویژه',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_featured_label', [
+			'label'   => __( 'Featured Post Label', 'devportfolio' ),
+			'section' => 'danial_home_blog_text',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_read_more_link', [
+			'default'           => 'مطالعه ادامه مطلب',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_read_more_link', [
+			'label'   => __( 'Read More Link Text', 'devportfolio' ),
+			'section' => 'danial_home_blog_text',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'blog_minutes_reading', [
+			'default'           => 'دقیقه مطالعه',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'blog_minutes_reading', [
+			'label'   => __( 'Minutes Reading Label', 'devportfolio' ),
+			'section' => 'danial_home_blog_text',
+			'type'    => 'text',
+		] );
+
+		// ── Home Portfolio Section Text ──────────────────────────────
+		$wp_customize->add_section( 'danial_home_portfolio_text', [
+			'title'    => __( 'Portfolio Section Text', 'devportfolio' ),
+			'priority' => 74,
+		] );
+
+		$wp_customize->add_setting( 'portfolio_view_details', [
+			'default'           => 'مشاهده جزئیات',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'portfolio_view_details', [
+			'label'   => __( 'View Details Text', 'devportfolio' ),
+			'section' => 'danial_home_portfolio_text',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'portfolio_sample_prefix', [
+			'default'           => 'پروژه نمونه شماره',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'portfolio_sample_prefix', [
+			'label'   => __( 'Sample Project Prefix', 'devportfolio' ),
+			'section' => 'danial_home_portfolio_text',
+			'type'    => 'text',
+		] );
+
+		$wp_customize->add_setting( 'portfolio_coming_soon', [
+			'default'           => 'در حال آماده‌سازی برای نمایش...',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'portfolio_coming_soon', [
+			'label'   => __( 'Coming Soon Text', 'devportfolio' ),
+			'section' => 'danial_home_portfolio_text',
+			'type'    => 'text',
 		] );
 
 		// ── Social Meta (SEO) ──────────────────────────────────────
