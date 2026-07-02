@@ -180,16 +180,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileClose = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
+    function openMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0', 'open');
+        document.body.classList.add('menu-open');
+    }
+    function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('translate-x-0', 'open');
+        mobileMenu.classList.add('translate-x-full');
+        document.body.classList.remove('menu-open');
+    }
     if (mobileToggle && mobileMenu) {
-        mobileToggle.addEventListener('click', () => {
-            mobileMenu.classList.remove('translate-x-full');
-            mobileMenu.classList.add('translate-x-0');
-        });
+        mobileToggle.addEventListener('click', openMobileMenu);
     }
     if (mobileClose && mobileMenu) {
-        mobileClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('translate-x-0');
-            mobileMenu.classList.add('translate-x-full');
+        mobileClose.addEventListener('click', closeMobileMenu);
+    }
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
     }
 

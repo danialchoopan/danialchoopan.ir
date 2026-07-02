@@ -15,6 +15,7 @@ $show_terminal     = get_theme_mod( 'show_hero_terminal', true );
 $show_glow         = get_theme_mod( 'hero_show_glow', true );
 $show_scanline     = get_theme_mod( 'hero_show_scanline', true );
 $show_glitch       = get_theme_mod( 'hero_show_glitch', true );
+$hero_text_pos     = get_theme_mod( 'hero_text_position', 'right' );
 ?>
 
 <section class="relative min-h-[90vh] flex items-center py-20 grid-pattern hero-particles overflow-hidden">
@@ -28,9 +29,15 @@ $show_glitch       = get_theme_mod( 'hero_show_glitch', true );
 
     <div class="container mx-auto px-6 grid grid-cols-1 <?php echo $show_terminal ? 'lg:grid-cols-2' : 'lg:grid-cols-1 max-w-4xl mx-auto'; ?> gap-16 items-center relative z-10">
 
-        <!-- Terminal Block — LEFT side (animated line by line) -->
-        <?php if ( $show_terminal ) : ?>
-        <div class="terminal-wrapper">
+        <?php
+        // Determine layout order based on text position
+        $terminal_first = ( $hero_text_pos === 'right' );
+        $is_centered    = ( $hero_text_pos === 'center' || ! $show_terminal );
+        ?>
+
+        <!-- Terminal Block -->
+        <?php if ( $show_terminal && ! $is_centered ) : ?>
+        <div class="terminal-wrapper <?php echo ! $terminal_first ? 'lg:order-2' : ''; ?>">
             <div class="bg-surface-darkest rounded-xl border border-border shadow-2xl overflow-hidden font-mono text-sm leading-relaxed relative">
                 <?php if ( $show_scanline ) : ?>
                 <div class="scanline-overlay"></div>
@@ -63,9 +70,9 @@ $show_glitch       = get_theme_mod( 'hero_show_glitch', true );
         </div>
         <?php endif; ?>
 
-        <!-- Content Block — RIGHT side -->
-        <div class="text-right rtl <?php echo !$show_terminal ? 'max-w-4xl mx-auto text-center' : ''; ?>">
-            <div class="<?php echo !$show_terminal ? 'flex justify-center' : ''; ?> mb-8">
+        <!-- Content Block -->
+        <div class="<?php echo $is_centered ? 'text-center max-w-4xl mx-auto' : 'text-right rtl'; ?> <?php echo $show_terminal && ! $is_centered && ! $terminal_first ? 'lg:order-1' : ''; ?>">
+            <div class="<?php echo $is_centered ? 'flex justify-center' : ( $hero_text_pos === 'left' ? '' : '' ); ?> mb-8">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-surface border border-border status-badge">
                     <span class="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500" data-type="SYSTEM.READY()" data-type-speed="40"></span>
                     <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -76,11 +83,11 @@ $show_glitch       = get_theme_mod( 'hero_show_glitch', true );
                 <?php echo esc_html( $hero_title ); ?>
             </h1>
 
-            <p class="text-zinc-400 text-lg mb-12 max-w-xl <?php echo $show_terminal ? 'ml-auto' : 'mx-auto'; ?> leading-relaxed">
+            <p class="text-zinc-400 text-lg mb-12 max-w-xl <?php echo $is_centered ? 'mx-auto' : ( $hero_text_pos === 'left' ? '' : 'ml-auto' ); ?> leading-relaxed">
                 <?php echo esc_html( $hero_bio ); ?>
             </p>
 
-            <div class="flex flex-wrap items-center <?php echo $show_terminal ? 'justify-end' : 'justify-center'; ?> gap-4">
+            <div class="flex flex-wrap items-center <?php echo $is_centered ? 'justify-center' : ( $hero_text_pos === 'left' ? 'justify-start' : 'justify-end' ); ?> gap-4">
                 <a href="<?php echo esc_url( $primary_cta_url ); ?>" class="px-8 py-4 bg-primary text-surface text-[12px] font-black uppercase tracking-widest rounded-sm hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20">
                     <?php echo esc_html( $primary_cta_text ); ?>
                 </a>

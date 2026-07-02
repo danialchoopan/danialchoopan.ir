@@ -22,7 +22,7 @@
             <?php
             $args = array(
                 'post_type' => 'portfolio',
-                'posts_per_page' => (int) get_theme_mod( 'portfolio_items_count', 3 ),
+                'posts_per_page' => (int) get_theme_mod( 'portfolio_items_count', -1 ),
             );
             $query = new WP_Query($args);
 

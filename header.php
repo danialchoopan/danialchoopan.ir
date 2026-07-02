@@ -70,25 +70,27 @@ $show_tagline = get_theme_mod( 'show_tagline', false );
 		</div>
 	</div>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-surface-darkest z-[60] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 md:hidden">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 text-white p-2">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <nav class="flex flex-col items-center gap-8 text-2xl font-black uppercase tracking-tighter text-zinc-500">
-            <?php
-            if ( has_nav_menu( 'primary' ) ) {
-                wp_nav_menu( array(
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => 'flex flex-col items-center gap-8',
-                    'items_wrap'     => '%3$s',
-                ) );
-            } ?>
-            <?php if ( get_theme_mod( 'show_header_cta', true ) ) : ?>
-            <a href="<?php echo esc_url( get_theme_mod( 'header_button_url', '#contact' ) ); ?>" class="mt-8 px-8 py-4 bg-primary text-surface text-sm font-black rounded-sm"><?php echo esc_html( get_theme_mod( 'header_button_text', 'HIRE_ME' ) ); ?></a>
-            <?php endif; ?>
-        </nav>
-    </div>
 </header>
+
+<!-- Mobile Menu (outside header for proper fixed stacking) -->
+<div id="mobile-menu" class="mobile-menu fixed inset-0 bg-surface-darkest z-[60] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 md:hidden" style="top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;">
+    <button id="mobile-menu-close" class="absolute top-5 right-5 text-white p-2 z-10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <nav class="flex flex-col items-center gap-8 text-2xl font-black uppercase tracking-tighter text-zinc-500 px-6">
+        <?php
+        if ( has_nav_menu( 'primary' ) ) {
+            wp_nav_menu( array(
+                'theme_location' => 'primary',
+                'container'      => false,
+                'menu_class'     => 'flex flex-col items-center gap-8',
+                'items_wrap'     => '%3$s',
+            ) );
+        } ?>
+        <?php if ( get_theme_mod( 'show_header_cta', true ) ) : ?>
+        <a href="<?php echo esc_url( get_theme_mod( 'header_button_url', '#contact' ) ); ?>" class="mt-8 px-8 py-4 bg-primary text-surface text-sm font-black rounded-sm"><?php echo esc_html( get_theme_mod( 'header_button_text', 'HIRE_ME' ) ); ?></a>
+        <?php endif; ?>
+    </nav>
+</div>
 
 <main class="min-h-screen pt-20" id="top">

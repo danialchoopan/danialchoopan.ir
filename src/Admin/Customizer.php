@@ -203,6 +203,21 @@ class Customizer {
 			'type'    => 'checkbox',
 		] );
 
+		$wp_customize->add_setting( 'hero_text_position', [
+			'default'           => 'right',
+			'sanitize_callback' => 'sanitize_text_field',
+		] );
+		$wp_customize->add_control( 'hero_text_position', [
+			'label'   => __( 'Hero Text Position', 'devportfolio' ),
+			'section' => 'danial_hero',
+			'type'    => 'select',
+			'choices' => [
+				'right' => 'Right (default)',
+				'left'  => 'Left',
+				'center'=> 'Center',
+			],
+		] );
+
 		// Section: Layout & Footer
         $wp_customize->add_section( 'danial_layout', [
 			'title'    => __( 'Layout & Footer', 'devportfolio' ),
@@ -313,7 +328,7 @@ class Customizer {
 		] );
 		$wp_customize->add_control( 'homepage_order', [
 			'label'       => __( 'Section Order (comma-separated)', 'devportfolio' ),
-			'description' => __( 'Available: hero, tech, stats, portfolio, blog', 'devportfolio' ),
+			'description' => __( 'Available: hero, tech, stats, portfolio, testimonials, cta, blog', 'devportfolio' ),
 			'section'     => 'danial_homepage',
 			'type'        => 'text',
 		] );
@@ -535,7 +550,7 @@ class Customizer {
 		] );
 
 		$wp_customize->add_setting( 'show_testimonials_section', [
-			'default'           => true,
+			'default'           => false,
 			'sanitize_callback' => 'wp_validate_boolean',
 		] );
 		$wp_customize->add_control( 'show_testimonials_section', [
@@ -782,10 +797,12 @@ class Customizer {
 		] );
 
 		$wp_customize->add_setting( 'portfolio_items_count', [
-			'default'           => '3',
-			'sanitize_callback' => 'absint',
+			'default'           => '-1',
+			'sanitize_callback' => 'intval',
 		] );
 		$wp_customize->add_control( 'portfolio_items_count', [
+			'label'       => __( 'Portfolio Items Count', 'devportfolio' ),
+			'description' => __( 'Set to -1 to show all items', 'devportfolio' ),
 			'label'   => __( 'Portfolio Items Count', 'devportfolio' ),
 			'section' => 'danial_portfolio',
 			'type'    => 'number',

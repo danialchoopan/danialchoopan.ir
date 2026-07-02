@@ -5,7 +5,7 @@
  * Section order is controlled via Customizer → Homepage Sections.
  * Each section can be individually toggled on/off.
  *
- * Available sections: hero, tech, stats, portfolio, testimonials, cta, blog
+ * Available sections: hero, tech, stats, portfolio, cta, blog
  *
  * @package DanialPortfolio
  */
@@ -13,7 +13,7 @@
 get_header();
 
 // Read section order from Customizer (comma-separated string)
-$order    = get_theme_mod( 'homepage_order', 'hero,tech,stats,portfolio,testimonials,cta,blog' );
+$order    = get_theme_mod( 'homepage_order', 'hero,tech,stats,portfolio,cta,blog' );
 $sections = array_map( 'trim', explode( ',', $order ) );
 
 foreach ( $sections as $section ) {
