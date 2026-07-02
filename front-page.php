@@ -41,7 +41,7 @@ foreach ( $sections as $section ) {
 			break;
 
 		case 'testimonials':
-			if ( get_theme_mod( 'show_testimonials_section', true ) ) {
+			if ( get_theme_mod( 'show_testimonials_section', false ) ) {
 				get_template_part( 'template-parts/home-testimonials' );
 			}
 			break;
