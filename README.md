@@ -8,6 +8,13 @@
 ![Offline](https://img.shields.io/badge/100%25-Offline-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/license-GPLv2-blue?style=flat-square)
 
+
+
+## Screenshots
+
+![Homepage](screenshots/1.jpg)
+
+
 ---
 
 ## Table of Contents
